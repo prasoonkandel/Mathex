@@ -28,6 +28,7 @@ This is version 1 of the code. More versions will be released soon. In this vers
    ```bash
    git clone https://github.com/YOUR-USERNAME/Mathex
    cd Mathex
+   git checkout Version-1
    ```
 
 3. **Set Up Upstream Remote**
@@ -50,4 +51,5 @@ This is version 1 of the code. More versions will be released soon. In this vers
 ---
 
 **Ready to contribute? Fork the repo and start coding! 🚀**
+
 
