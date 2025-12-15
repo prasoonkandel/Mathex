@@ -2,7 +2,11 @@
 
 ---
 
-AI powered software to help you in your homeworks. Still in development phase
+AI powered software to help you in your homeworks. 
+
+---
+
+This is version 1 of the code. More versions will be released soon. In this version, running the ans.py file launches a terminal-based mathematical problem solver.
 
 ## Getting Started
 
@@ -46,3 +50,4 @@ AI powered software to help you in your homeworks. Still in development phase
 ---
 
 **Ready to contribute? Fork the repo and start coding! 🚀**
+
