@@ -8,6 +8,7 @@ load_dotenv()
 
 
 AI_KEY = os.getenv("AI_KEY")
+
 API_URL = "https://ai.hackclub.com/proxy/v1/chat/completions"
 
 
