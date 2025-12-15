@@ -1,4 +1,3 @@
-import webbrowser
 from back import answer  
 
 # ==== demo question for testing ==== # (it was in my book XD)
