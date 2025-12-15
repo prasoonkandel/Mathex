@@ -1,0 +1,6 @@
+/Something/learn.class
+/__pycache__/
+/venv
+*.pyc
+.env
+/personal
