@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mathex - Math Problem Solver</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Mathex</h1>
+        <p class="slogan">AI-Powered Mathematics Assistant</p>
+      </header>
+
+      <main class="main-content">
+        <div class="chat-container">
+          <div id="chat-messages" class="chat-messages">
+            <div class="welcome-message">
+              <h2>Welcome to Mathex</h2>
+              <p>I can help you solve mathematics problems step by step.</p>
+              <p class="hint">
+                Type your math question below and press Enter or click Send.
+              </p>
+            </div>
+          </div>
+
+          <div class="input-section">
+            <form id="question-form">
+              <div class="input-wrapper">
+                <textarea
+                  id="question-input"
+                  placeholder="Type your math problem here... (e.g., Solve x² + 5x + 6 = 0)"
+                  rows="3"
+                  required
+                ></textarea>
+                <button type="submit" id="send-btn" class="send-btn">
+                  <span id="send-text">Send</span>
+                  <span
+                    id="loading-spinner"
+                    class="spinner"
+                    style="display: none"
+                    >●</span
+                  >
+                </button>
+              </div>
+            </form>
+            <div class="example-questions">
+              <p>Try asking:</p>
+              <button
+                class="example-btn"
+                onclick="setExample('Solve the equation: 2x + 5 = 15')"
+              >
+                Solve 2x + 5 = 15
+              </button>
+              <button
+                class="example-btn"
+                onclick="setExample('Prove the identity: √( (Csc A - 1) / (Csc A + 1) ) = 1/ (Sec A + Tan A)')"
+              >
+                Trigonometry Question
+              </button>
+              <button
+                class="example-btn"
+                onclick="setExample('Calculate the area of a circle with radius 5cm')"
+              >
+                Circle area
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p>Built by Prasoon Kandel | Powered by AI</p>
+      </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>

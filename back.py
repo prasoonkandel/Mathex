@@ -12,6 +12,7 @@ AI_KEY = os.getenv("AI_KEY")
 API_URL = "https://ai.hackclub.com/proxy/v1/chat/completions"
 
 
+
 MODEL = "openai/gpt-5-mini"
 
 
@@ -21,8 +22,13 @@ if not AI_KEY:
 current_datetime = datetime.now()
 
 commands = {
+
+
     "bye": "Bye, have a nice day!"
+
+
 }
+
 
 
 
@@ -43,7 +49,7 @@ def inital_prompt(user_message: str):
                 "Step 1:\n"
                 "Step 2:\n"
                 "Final Answer:"
-                "Note: If the question is incorrect or incomplete, inform the user it is incorrect or incomplete only do not correct the question. \n"
+                "Note: If the question is incorrect or incomplete, inform the user it is incorrect or incomplete only do not correct the question. But check and analyze deep if it correct or not. If the qestion is bias but typing mistake you can correct. \n"
                 "Note: If the question is not mathematical, inform the user that you can only assist with math problems by telling exact this phrase: 'Sorry that expression is not a mathematical problem. I am a mathematics problem-solving engine built by Prasoon Kandel. I can only assist with math problems.'"
 
             )
@@ -92,3 +98,4 @@ def answer(user_message: str):
 
         eror_message = "Hack Club AI Error:" + str(e)
         return eror_message
+

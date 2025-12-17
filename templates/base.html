@@ -4,15 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Testing</title>
+    <link rel="stylesheet" href="../static/styles.css" />
+
+    {% block head %}{% endblock %}
   </head>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 50px;
-    }
-  </style>
+
   <body>
-    <h1>Hello, World!</h1>
+    {% block body %}
+    <h1>Hello, World! from Flask</h1>
+    {% endblock %}
   </body>
 </html>
