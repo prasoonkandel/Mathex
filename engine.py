@@ -71,7 +71,8 @@ def api_call(messages):
         "messages": messages,
         "temperature": 0.2,
 
-    
+         
+         
     }
 
     response = requests.post(API_URL, headers=headers, json=payload)
