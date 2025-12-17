@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mathex - AI-Powered Math Tools</title>
+    <link rel="stylesheet" href="../static/root.css" />
+    <link rel="stylesheet" href="../static/styles.css" />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='styles.css') }}"
@@ -15,32 +17,29 @@
   </head>
   <body>
     <header><h1>Mathex</h1></header>
-
-    <section class="intro">
-      <h2>Welcome to Mathex</h2>
-      <p>
-        Your AI-powered companion for solving math problems and generating
-        practice questions.
-      </p>
-    </section>
-    <section class="features">
-      <div class="feature">
-        <h3>Math Problem Solver</h3>
-        <p>
-          Get step-by-step solutions to your math problems quickly and easily.
-        </p>
-        <a href="/solver" class="btn">Try the Solver</a>
-      </div>
-      <div class="feature">
-        <h3>Quiz Generator</h3>
-        <p>
-          Create quiz questions tailored to your grade level and topics of
-          interest.
-        </p>
-        <a href="/quiz" class="btn">Generate Questions</a>
-      </div>
-    </section>
-
+    <div class="content">
+      <section class="intro">
+        <h2>Welcome to Mathex</h2>
+        <p>Here are some tools which can help you in maths.</p>
+      </section>
+      <section class="features">
+        <div class="feature">
+          <h3>Math Problem Solver</h3>
+          <p>
+            Get step-by-step solutions to your math problems quickly and easily.
+          </p>
+          <a href="/solver" class="btn">Try the Solver</a>
+        </div>
+        <div class="feature">
+          <h3>Quiz Generator</h3>
+          <p>
+            Create quiz questions tailored to your grade level and topics of
+            interest.
+          </p>
+          <a href="/quiz" class="btn">Generate Questions</a>
+        </div>
+      </section>
+    </div>
     <footer>Mathex | Built by Prasoon Kandel</footer>
   </body>
 </html>
