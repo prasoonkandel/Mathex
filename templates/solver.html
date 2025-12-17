@@ -1,15 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mathex - Math Problem Solver</title>
+    <title>Mathex Solver</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='styles.css') }}"
+      href="{{ url_for('static', filename='solver.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='root.css') }}"
     />
   </head>
   <body>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <h1>Mathex Solver</h1>
+    <p><a href="/">← Back to Home</a></p>
+
+    <div class="container">
+      <form id="solverForm">
+        <textarea
+          id="question"
+          placeholder="Enter your math problem here...&#10;&#10;Example: Solve x² + 5x + 6 = 0"
+          required
+        ></textarea>
+        <button type="submit" id="submitBtn">Solve Problem</button>
+      </form>
+
+      <div id="result" class="result"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='solver.js') }}"></script>
   </body>
 </html>

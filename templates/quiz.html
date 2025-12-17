@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mathex Quiz Generator</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='quiz.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='root.css') }}"
+    />
+  </head>
+  <body>
+    <h1>Mathex Quiz Generator</h1>
+    <p><a href="/">← Back to Home</a></p>
+
+    <div class="container">
+      <form id="quizForm">
+        <label for="grade">Grade Level</label>
+        <select id="grade" required>
+          <option value="">Select Grade Level</option>
+          <option value="1">Grade 1</option>
+          <option value="2">Grade 2</option>
+          <option value="3">Grade 3</option>
+          <option value="4">Grade 4</option>
+          <option value="5">Grade 5</option>
+          <option value="6">Grade 6</option>
+          <option value="7">Grade 7</option>
+          <option value="8">Grade 8</option>
+          <option value="9">Grade 9</option>
+          <option value="10">Grade 10</option>
+          <option value="11">Grade 11</option>
+          <option value="12">Grade 12</option>
+        </select>
+
+        <label for="topic">Topic/Description</label>
+        <textarea
+          id="topic"
+          placeholder="Enter the topic or description...&#10;&#10;Example: Algebra - Linear equations"
+          required
+        ></textarea>
+
+        <button type="submit" id="submitBtn">Generate Quiz</button>
+      </form>
+
+      <div id="result" class="result"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='quiz.js') }}"></script>
+  </body>
+</html>
