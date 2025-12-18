@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mathex Quiz Generator</title>
+    <title>Mathex Quiz</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='quiz.css') }}"
@@ -14,43 +14,129 @@
     />
   </head>
   <body>
+    <nav>
+      <div class="nav-container">
+        <a href="/" class="logo">Mathex</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="/">Home</a></li>
+          <li><a href="/solver">Solver</a></li>
+          <li><a href="/quiz">Quiz</a></li>
+          <li>
+            <button
+              class="theme-toggle"
+              id="themeToggle"
+              aria-label="Toggle theme"
+            >
+              🌙
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
     <div class="content">
-      <h1>Mathex Quiz Generator</h1>
-      <p><a href="/">← Back to Home</a></p>
-
       <div class="container">
-        <form id="quizForm">
-          <label for="grade">Grade Level</label>
-          <select id="grade" required>
-            <option value="">Select Grade Level</option>
-            <option value="1">Grade 1</option>
-            <option value="2">Grade 2</option>
-            <option value="3">Grade 3</option>
-            <option value="4">Grade 4</option>
-            <option value="5">Grade 5</option>
-            <option value="6">Grade 6</option>
-            <option value="7">Grade 7</option>
-            <option value="8">Grade 8</option>
-            <option value="9">Grade 9</option>
-            <option value="10">Grade 10</option>
-            <option value="11">Grade 11</option>
-            <option value="12">Grade 12</option>
-          </select>
+        <h1>Quiz Generator</h1>
+        <p class="subtitle">Create a custom quiz for practice</p>
 
-          <label for="topic">Topic/Description</label>
-          <textarea
-            id="topic"
-            placeholder="Enter the topic or description...&#10;&#10;Example: Algebra - Linear equations"
-            required
-          ></textarea>
+        <div id="setupScreen" class="screen active">
+          <form id="quizForm">
+            <label for="grade">Grade Level</label>
+            <select id="grade" required>
+              <option value="">Select Grade Level</option>
+              <option value="1">Grade 1</option>
+              <option value="2">Grade 2</option>
+              <option value="3">Grade 3</option>
+              <option value="4">Grade 4</option>
+              <option value="5">Grade 5</option>
+              <option value="6">Grade 6</option>
+              <option value="7">Grade 7</option>
+              <option value="8">Grade 8</option>
+              <option value="9">Grade 9</option>
+              <option value="10">Grade 10</option>
+              <option value="11">Grade 11</option>
+              <option value="12">Grade 12</option>
+            </select>
 
-          <button type="submit" id="submitBtn">Generate Quiz</button>
-        </form>
+            <label for="topic">Topic/Description</label>
+            <textarea
+              id="topic"
+              placeholder="Enter the topic or description...&#10;&#10;Example: Algebra - Linear equations"
+              required
+            ></textarea>
 
-        <div id="result" class="result"></div>
+            <button type="submit" id="submitBtn">Generate Quiz</button>
+          </form>
+
+          <div id="loadingMessage" class="loading-message"></div>
+        </div>
+
+        <div id="quizScreen" class="screen">
+          <div class="quiz-header">
+            <div class="progress-container">
+              <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="question-counter" id="questionCounter"></div>
+          </div>
+
+          <div id="questionContainer">
+            <h2 id="questionText" class="question-text"></h2>
+            <div id="optionsContainer" class="options-container"></div>
+          </div>
+
+          <div class="quiz-actions">
+            <button id="nextBtn" class="btn-secondary">Next Question</button>
+          </div>
+        </div>
+
+        <div id="resultsScreen" class="screen">
+          <div class="results-container">
+            <h2>Quiz Complete!</h2>
+            <div class="score-display">
+              <div class="score-circle">
+                <span id="finalScore" class="score-number">0</span>
+                <span class="score-label">Score</span>
+              </div>
+            </div>
+            <div id="scoreSummary" class="score-summary"></div>
+            <button id="retryBtn" class="btn-primary">Try Another Quiz</button>
+          </div>
+        </div>
       </div>
     </div>
+
     <footer>Mathex | Built by Prasoon Kandel</footer>
+    <script>
+      // Initialize theme from localStorage
+      const currentTheme = localStorage.getItem("theme") || "light";
+      document.documentElement.setAttribute("data-theme", currentTheme);
+      const themeToggle = document.getElementById("themeToggle");
+      if (themeToggle) {
+        themeToggle.textContent = currentTheme === "dark" ? "☀️" : "🌙";
+        themeToggle.addEventListener("click", () => {
+          const theme = document.documentElement.getAttribute("data-theme");
+          const newTheme = theme === "dark" ? "light" : "dark";
+          document.documentElement.setAttribute("data-theme", newTheme);
+          localStorage.setItem("theme", newTheme);
+          themeToggle.textContent = newTheme === "dark" ? "☀️" : "🌙";
+        });
+      }
+
+      // Hamburger menu
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.getElementById("navLinks");
+      if (hamburger) {
+        hamburger.addEventListener("click", () => {
+          hamburger.classList.toggle("active");
+          navLinks.classList.toggle("active");
+        });
+      }
+    </script>
     <script src="{{ url_for('static', filename='quiz.js') }}"></script>
   </body>
 </html>

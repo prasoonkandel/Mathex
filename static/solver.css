@@ -1,69 +1,201 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Solver page specific styles */
+
+/* Content */
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  min-height: calc(100vh - 200px);
 }
-body {
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
-  background: #f5f5f5;
-}
-h1 {
-  font-family: Mozilla Headline, sans-serif;
-  margin-bottom: 10px;
-}
-a {
-  color: #6366f1;
-  text-decoration: none;
-}
+
 .container {
-  background: white;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: var(--card-bg);
+  padding: 2.5rem;
+  border-radius: 12px;
+  border: 2px solid var(--border-color);
+  transition: all 0.3s ease;
 }
+
+h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+}
+
+/* Symbols Section */
+.symbols-section {
+  margin-bottom: 1.75rem;
+  padding: 1.25rem;
+  background: var(--bg-tertiary);
+  border-radius: 10px;
+  border: 2px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.symbols-label {
+  display: block;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.symbols-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+  gap: 0.625rem;
+}
+
+.symbol-btn {
+  width: 100%;
+  padding: 0.625rem;
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: var(--text-primary);
+}
+
+.symbol-btn:hover {
+  background: var(--accent-color);
+  color: #fff;
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.symbol-btn:active {
+  transform: scale(0.95);
+}
+
 textarea {
   width: 100%;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
+  padding: 1.125rem;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1.05rem;
   resize: vertical;
-  min-height: 100px;
+  min-height: 170px;
+  font-family: inherit;
+  transition: all 0.3s;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  line-height: 1.6;
 }
-button {
+
+textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  background: var(--bg-primary);
+}
+
+button[type="submit"] {
   width: 100%;
-  padding: 15px;
-  background: #6366f1;
+  padding: 1rem;
+  background: var(--accent-color);
   color: white;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 1.25rem;
+  transition: all 0.3s;
 }
-button:hover {
-  background: #4f46e5;
+
+button[type="submit"]:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
 }
-button:disabled {
-  background: #cbd5e1;
+
+button[type="submit"]:disabled {
+  background: var(--text-tertiary);
   cursor: not-allowed;
+  transform: none;
 }
+
 .result {
-  margin-top: 20px;
-  padding: 20px;
-  background: #f8fafc;
-  border-left: 4px solid #6366f1;
-  border-radius: 5px;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--info-bg);
+  border-left: 4px solid var(--accent-color);
+  border-radius: 8px;
   white-space: pre-wrap;
   display: none;
+  line-height: 1.8;
+  color: var(--text-primary);
+  font-size: 1.05rem;
 }
-.error {
-  border-left-color: #ef4444;
-  background: #fef2f2;
+
+.result.error {
+  border-left-color: var(--error-color);
+  background: var(--error-bg);
+  color: var(--error-text);
 }
-.loading {
+
+.result.loading {
   text-align: center;
-  color: #6366f1;
+  color: var(--info-color);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 1.5rem 1rem;
+  }
+
+  .container {
+    padding: 2rem 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.875rem;
+  }
+
+  .symbols-grid {
+    grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .symbol-btn {
+    padding: 0.5rem;
+    font-size: 1.125rem;
+  }
+
+  .symbol-btn:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem 1rem;
+  }
+
+  h1 {
+    font-size: 1.625rem;
+  }
+
+  .symbols-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.375rem;
+  }
+
+  .symbol-btn {
+    padding: 0.375rem;
+    font-size: 1rem;
+  }
+
+  textarea {
+    min-height: 140px;
+    font-size: 1rem;
+  }
 }

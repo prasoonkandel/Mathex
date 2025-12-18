@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mathex - Modern Math Tools</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='root.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='home.css') }}"
+    />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="/" class="logo">Mathex</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="/">Home</a></li>
+          <li><a href="/solver">Solver</a></li>
+          <li><a href="/quiz">Quiz</a></li>
+          <li>
+            <button
+              class="theme-toggle"
+              id="themeToggle"
+              aria-label="Toggle theme"
+            >
+              🌙
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <h1>Mathex</h1>
+        <span class="slogan">Tool built by Student for Students</span>
+        <p>
+          Mathex is a collection of AI-powered math tools designed to help
+          students excel in their studies. It includes a math problem solver and
+          a quiz generator to make learning math easier and more engaging.
+          Students can use mathex to learn new things by doing experiments and
+          solving problems.
+        </p>
+        <a href="#tools" class="cta-button">Explore Tools</a>
+      </section>
+
+      <section class="tools-section" id="tools">
+        <h2>Our Tools</h2>
+        <div class="tools-grid">
+          <div class="tool-card">
+            <h3>Math Solver</h3>
+            <p>
+              Get step-by-step solutions to complex math problems. From algebra
+              to calculus, we've got you covered.
+            </p>
+            <a href="/solver" class="tool-link">Try Solver →</a>
+          </div>
+
+          <div class="tool-card">
+            <h3>Quiz Generator</h3>
+            <p>
+              Create customized quizzes for any grade level and topic. Perfect
+              for studying and practice.
+            </p>
+            <a href="/quiz" class="tool-link">Generate Quiz →</a>
+          </div>
+
+          <div class="tool-card">
+            <h3>Graph Plotter</h3>
+            <p>
+              Visualize mathematical functions and equations with our
+              interactive graphing tool.
+            </p>
+            <a href="#" class="tool-link">Coming Soon →</a>
+          </div>
+
+          <div class="tool-card">
+            <h3>Math Quotes</h3>
+            <p>
+              Get inspired with mathematical insights and quotes from famous
+              mathematicians.
+            </p>
+            <a href="#" class="tool-link">Coming Soon →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>Mathex | Built by Prasoon Kandel</footer>
+
+    <script src="{{ url_for('static', filename='home.js') }}"></script>
+  </body>
+</html>

@@ -2,6 +2,23 @@ const form = document.getElementById("solverForm");
 const questionInput = document.getElementById("question");
 const resultDiv = document.getElementById("result");
 const submitBtn = document.getElementById("submitBtn");
+const symbolsGrid = document.getElementById("symbolsGrid");
+
+symbolsGrid.addEventListener("click", (e) => {
+  if (e.target.classList.contains("symbol-btn")) {
+    const symbol = e.target.dataset.symbol;
+    const cursorPos = questionInput.selectionStart;
+    const textBefore = questionInput.value.substring(0, cursorPos);
+    const textAfter = questionInput.value.substring(cursorPos);
+
+    questionInput.value = textBefore + symbol + textAfter;
+    questionInput.focus();
+    questionInput.setSelectionRange(
+      cursorPos + symbol.length,
+      cursorPos + symbol.length
+    );
+  }
+});
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
