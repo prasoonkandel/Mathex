@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mathex Quotes</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='quotes.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='root.css') }}"
+    />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="/" class="logo">Mathex</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="/">Home</a></li>
+          <li><a href="/solver">Solver</a></li>
+          <li><a href="/quiz">Quiz</a></li>
+          <li><a href="/quotes">Quotes</a></li>
+          <li>
+            <button
+              class="theme-toggle"
+              id="themeToggle"
+              aria-label="Toggle theme"
+            >
+              🌙
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="content">
+      <div class="container">
+        <h1>Math Quotes</h1>
+        <p class="subtitle">Get inspired by mathematical wisdom</p>
+
+        <div class="quote-card">
+          <div class="quote-icon">"</div>
+          <p id="quoteText" class="quote-text">
+            Click the button below to get a random math quote
+          </p>
+          <p id="quoteAuthor" class="quote-author"></p>
+        </div>
+
+        <button id="newQuoteBtn" class="btn-primary">Get New Quote</button>
+      </div>
+    </div>
+
+    <footer>Mathex | Built by Prasoon Kandel</footer>
+
+    <script>
+      // Initialize theme
+      const currentTheme = localStorage.getItem("theme") || "light";
+      document.documentElement.setAttribute("data-theme", currentTheme);
+      const themeToggle = document.getElementById("themeToggle");
+      if (themeToggle) {
+        themeToggle.textContent = currentTheme === "dark" ? "☀️" : "🌙";
+        themeToggle.addEventListener("click", () => {
+          const theme = document.documentElement.getAttribute("data-theme");
+          const newTheme = theme === "dark" ? "light" : "dark";
+          document.documentElement.setAttribute("data-theme", newTheme);
+          localStorage.setItem("theme", newTheme);
+          themeToggle.textContent = newTheme === "dark" ? "☀️" : "🌙";
+        });
+      }
+
+      // Hamburger menu
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.getElementById("navLinks");
+      if (hamburger) {
+        hamburger.addEventListener("click", () => {
+          hamburger.classList.toggle("active");
+          navLinks.classList.toggle("active");
+        });
+      }
+
+      // Quotes functionality
+      const quoteText = document.getElementById("quoteText");
+      const quoteAuthor = document.getElementById("quoteAuthor");
+      const newQuoteBtn = document.getElementById("newQuoteBtn");
+
+      async function getQuote() {
+        newQuoteBtn.disabled = true;
+        newQuoteBtn.textContent = "Loading...";
+        quoteText.style.opacity = "0.5";
+        quoteAuthor.style.opacity = "0.5";
+
+        try {
+          const response = await fetch("/api/quotes");
+          const data = await response.json();
+
+          if (response.ok) {
+            setTimeout(() => {
+              quoteText.textContent = data.quote;
+              quoteAuthor.textContent = "- " + data.author;
+              quoteText.style.opacity = "1";
+              quoteAuthor.style.opacity = "1";
+            }, 200);
+          } else {
+            quoteText.textContent = "Error loading quote";
+            quoteAuthor.textContent = "";
+          }
+        } catch (error) {
+          quoteText.textContent = "Could not connect to server";
+          quoteAuthor.textContent = "";
+        } finally {
+          newQuoteBtn.disabled = false;
+          newQuoteBtn.textContent = "Get New Quote";
+        }
+      }
+
+      newQuoteBtn.addEventListener("click", getQuote);
+
+      // Load a quote on page load
+      getQuote();
+    </script>
+  </body>
+</html>
