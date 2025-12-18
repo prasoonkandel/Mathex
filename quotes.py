@@ -6,7 +6,9 @@ def quote():
     try:
 
         response = requests.get(API_URL, timeout=5)
+
         response.raise_for_status()
+        
         return response.json()
     
     except requests.RequestException as e:
@@ -16,7 +18,7 @@ def quote():
 def printer():
 
     print("This is a random quote:")
-    
+
     quote_data = quote()
 
     if "error" in quote_data:
