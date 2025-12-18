@@ -1,27 +1,23 @@
-import requests
+import json
+import random
 
-API_URL = "https://random-math-quote-api.herokuapp.com/"
+JSON_FILE = "quotes.json"
 
-def quote():
-    try:
+def quotes():
 
-        response = requests.get(API_URL, timeout=5)
+    with open(JSON_FILE, "r") as kitab:
+        data = json.load(kitab)
 
-        response.raise_for_status()
-        
-        return response.json()
-    
-    except requests.RequestException as e:
+    quote = random.choice(data["quotes"])   
 
-        return {"error": f"Can't fetch quote due to: {e}"}
+    return quote
 
 def printer():
 
-    print("This is a random quote:")
+    quote = quotes()
 
-    quote_data = quote()
+    print(f"{quote['quote']} \n - {quote['author']}") 
 
-    if "error" in quote_data:
-        print(quote_data["error"])
-    else:
-        print(f'"{quote_data.get("quote", "No quote")}" - {quote_data.get("author", "Unknown")}')
+
+
+printer()    
