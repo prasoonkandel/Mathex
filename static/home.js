@@ -26,7 +26,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("themeToggle");
 
   if (themeToggle) {
-    const currentTheme = localStorage.getItem("theme") || "light";
+    // Auto-detect system preference on first visit
+    let currentTheme = localStorage.getItem("theme");
+    if (!currentTheme) {
+      const prefersDark =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      currentTheme = prefersDark ? "dark" : "light";
+      localStorage.setItem("theme", currentTheme);
+    }
     document.documentElement.setAttribute("data-theme", currentTheme);
     themeToggle.textContent = currentTheme === "dark" ? "☀️" : "🌙";
 

@@ -45,7 +45,7 @@
 
 .cta-button {
   display: inline-block;
-  padding: 1rem 1.4rem;
+  padding: 0.8rem;
   background: var(--accent-color);
   color: #fff;
   text-decoration: none;
@@ -132,6 +132,9 @@
   .hero h1 {
     font-size: 2.25rem;
   }
+  .cta-button {
+    font-size: 1rem;
+  }
 
   .hero p {
     font-size: 1.125rem;
@@ -142,7 +145,7 @@
   }
 
   .tools-section h2 {
-    font-size: 1.875rem;
+    font-size: 2.25rem;
   }
 
   .tools-grid {
