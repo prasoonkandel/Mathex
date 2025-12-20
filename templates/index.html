@@ -24,6 +24,26 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='quotes.css') }}"
     />
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ],
+        },
+      };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
   </head>
   <body>
     <nav>
@@ -52,7 +72,6 @@
       </div>
     </nav>
 
-    <!-- HOME PAGE SECTION -->
     <section id="page-home" class="page-section active">
       <main>
         <section class="hero">
@@ -103,7 +122,6 @@
       </main>
     </section>
 
-    <!-- SOLVER PAGE SECTION -->
     <section id="page-solver" class="page-section">
       <div class="content">
         <div class="container">
@@ -171,21 +189,32 @@
             </div>
           </div>
 
-          <form id="solverForm">
-            <textarea
-              id="question"
-              placeholder="Enter your math problem here...&#10;&#10;Example: Solve x² + 5x + 6 = 0"
-              required
-            ></textarea>
-            <button type="submit" id="submitBtn">Solve Problem</button>
-          </form>
+          <div id="inputArea">
+            <form id="solverForm">
+              <textarea
+                id="question"
+                placeholder="Enter your math problem here...&#10;&#10;Example: Solve x² + 5x + 6 = 0"
+                required
+              ></textarea>
 
-          <div id="result" class="result"></div>
+              <button type="submit" id="submitBtn">Solve Problem</button>
+            </form>
+          </div>
+
+          <div id="resultArea" style="display: none">
+            <div id="result" class="result"></div>
+            <button
+              type="button"
+              id="solveAnotherBtn"
+              class="solve-another-btn"
+            >
+              Solve Another Problem
+            </button>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- QUIZ PAGE SECTION -->
     <section id="page-quiz" class="page-section">
       <div class="content">
         <div class="container">
@@ -219,7 +248,7 @@
                 required
               ></textarea>
 
-              <button type="submit" id="submitBtn">Generate Quiz</button>
+              <button type="submit" id="quizSubmitBtn">Generate Quiz</button>
             </form>
 
             <div id="loadingMessage" class="loading-message"></div>
@@ -262,7 +291,6 @@
       </div>
     </section>
 
-    <!-- QUOTES PAGE SECTION -->
     <section id="page-quotes" class="page-section">
       <div class="content">
         <div class="container">
@@ -289,7 +317,6 @@
     <script src="{{ url_for('static', filename='solver.js') }}"></script>
     <script src="{{ url_for('static', filename='quiz.js') }}"></script>
     <script>
-      // SPA logic gettin feel of React uhmmm :)
       function showPage(pageName) {
         document.querySelectorAll(".page-section").forEach((section) => {
           section.classList.remove("active");

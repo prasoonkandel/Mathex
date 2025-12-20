@@ -1,225 +1,248 @@
-let quizData = null;
-let currentQuestionIndex = 0;
-let score = 0;
-let userAnswers = [];
+(function () {
+  let quizData = null;
+  let currentQuestionIndex = 0;
+  let score = 0;
+  let userAnswers = [];
 
-const setupScreen = document.getElementById("setupScreen");
-const quizScreen = document.getElementById("quizScreen");
-const resultsScreen = document.getElementById("resultsScreen");
+  let setupScreen, quizScreen, resultsScreen;
+  let form, gradeInput, topicInput, submitBtn, loadingMessage;
+  let progressBar, questionCounter, questionText, optionsContainer, nextBtn;
+  let finalScore, scoreSummary, retryBtn;
 
-const form = document.getElementById("quizForm");
-const gradeInput = document.getElementById("grade");
-const topicInput = document.getElementById("topic");
-const submitBtn = document.getElementById("submitBtn");
-const loadingMessage = document.getElementById("loadingMessage");
+  document.addEventListener("DOMContentLoaded", function () {
+    setupScreen = document.getElementById("setupScreen");
+    quizScreen = document.getElementById("quizScreen");
+    resultsScreen = document.getElementById("resultsScreen");
 
-const progressBar = document.getElementById("progressBar");
-const questionCounter = document.getElementById("questionCounter");
-const questionText = document.getElementById("questionText");
-const optionsContainer = document.getElementById("optionsContainer");
-const nextBtn = document.getElementById("nextBtn");
+    form = document.getElementById("quizForm");
+    gradeInput = document.getElementById("grade");
+    topicInput = document.getElementById("topic");
+    submitBtn = document.getElementById("quizSubmitBtn");
+    loadingMessage = document.getElementById("loadingMessage");
 
-const finalScore = document.getElementById("finalScore");
-const scoreSummary = document.getElementById("scoreSummary");
-const retryBtn = document.getElementById("retryBtn");
+    progressBar = document.getElementById("progressBar");
+    questionCounter = document.getElementById("questionCounter");
+    questionText = document.getElementById("questionText");
+    optionsContainer = document.getElementById("optionsContainer");
+    nextBtn = document.getElementById("nextBtn");
 
-form.addEventListener("submit", handleQuizGeneration);
-nextBtn.addEventListener("click", handleNextQuestion);
-retryBtn.addEventListener("click", resetQuiz);
+    finalScore = document.getElementById("finalScore");
+    scoreSummary = document.getElementById("scoreSummary");
+    retryBtn = document.getElementById("retryBtn");
 
-async function handleQuizGeneration(e) {
-  e.preventDefault();
+    if (form) form.addEventListener("submit", handleQuizGeneration);
+    if (nextBtn) nextBtn.addEventListener("click", handleNextQuestion);
+    if (retryBtn) retryBtn.addEventListener("click", resetQuiz);
+  });
 
-  const grade = gradeInput.value;
-  const topic = topicInput.value.trim();
+  async function handleQuizGeneration(e) {
+    e.preventDefault();
 
-  if (!grade || !topic) return;
+    const grade = gradeInput.value;
+    const topic = topicInput.value.trim();
 
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Generating...";
-  loadingMessage.textContent = "Creating your quiz questions...";
-  loadingMessage.classList.add("active");
+    if (!grade || !topic) return;
 
-  try {
-    const response = await fetch("/api/quiz", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        grade_level: grade,
-        description: topic,
-      }),
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Generating...";
+    loadingMessage.textContent = "Creating your quiz questions...";
+    loadingMessage.classList.add("active");
+
+    try {
+      const response = await fetch("/api/quiz", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          grade_level: grade,
+          description: topic,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        try {
+          let quizString = data.quiz;
+
+          if (quizString.includes("```json")) {
+            quizString = quizString.split("```json")[1].split("```")[0].trim();
+          } else if (quizString.includes("```")) {
+            quizString = quizString.split("```")[1].split("```")[0].trim();
+          }
+
+          quizData = JSON.parse(quizString);
+
+          if (!quizData.questions || quizData.questions.length === 0) {
+            throw new Error("No questions generated");
+          }
+
+          const invalidQuestions = quizData.questions.filter(
+            (q) =>
+              !q.options || !Array.isArray(q.options) || q.options.length === 0
+          );
+
+          if (invalidQuestions.length > 0) {
+            console.error("Invalid questions found:", invalidQuestions);
+            throw new Error(
+              "Some questions are missing answer options. Please try again."
+            );
+          }
+
+          startQuiz();
+        } catch (parseError) {
+          console.error("Parse error:", parseError);
+          console.error("Raw quiz data:", data.quiz);
+          loadingMessage.textContent =
+            "Error: " + (parseError.message || "Invalid quiz format received");
+          loadingMessage.style.color = "#ef4444";
+        }
+      } else {
+        console.error("Server error:", data);
+        loadingMessage.textContent =
+          "Error: " + (data.error || "Something went wrong");
+        loadingMessage.style.color = "#ef4444";
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      loadingMessage.textContent = "Error: Could not connect to server";
+      loadingMessage.style.color = "#ef4444";
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Generate Quiz";
+    }
+  }
+
+  function startQuiz() {
+    currentQuestionIndex = 0;
+    score = 0;
+    userAnswers = [];
+
+    setupScreen.classList.remove("active");
+    quizScreen.classList.add("active");
+
+    displayQuestion();
+  }
+
+  function displayQuestion() {
+    const question = quizData.questions[currentQuestionIndex];
+
+    if (
+      !question.options ||
+      !Array.isArray(question.options) ||
+      question.options.length === 0
+    ) {
+      console.error("Question missing options:", question);
+      loadingMessage.textContent =
+        "Error: Question is missing answer options. Please regenerate the quiz.";
+      loadingMessage.style.color = "#ef4444";
+      loadingMessage.classList.add("active");
+      return;
+    }
+
+    const progress =
+      ((currentQuestionIndex + 1) / quizData.questions.length) * 100;
+    progressBar.style.width = progress + "%";
+
+    questionCounter.textContent = `Question ${currentQuestionIndex + 1} of ${
+      quizData.questions.length
+    }`;
+
+    questionText.textContent = question.question;
+
+    optionsContainer.innerHTML = "";
+
+    question.options.forEach((option, index) => {
+      const button = document.createElement("button");
+      button.className = "option-btn";
+      button.textContent = option;
+      button.addEventListener("click", () => selectOption(index));
+      optionsContainer.appendChild(button);
     });
 
-    const data = await response.json();
+    nextBtn.disabled = true;
+  }
 
-    if (response.ok) {
-      try {
-        quizData = JSON.parse(data.quiz);
+  function selectOption(selectedIndex) {
+    const question = quizData.questions[currentQuestionIndex];
+    const options = optionsContainer.querySelectorAll(".option-btn");
 
-        if (!quizData.questions || quizData.questions.length === 0) {
-          throw new Error("No questions generated");
-        }
+    options.forEach((btn) => (btn.disabled = true));
 
-        const invalidQuestions = quizData.questions.filter(
-          (q) =>
-            !q.options || !Array.isArray(q.options) || q.options.length === 0
-        );
+    const correctAnswerLetter = question.correct_answer;
+    let correctIndex;
 
-        if (invalidQuestions.length > 0) {
-          console.error("Invalid questions found:", invalidQuestions);
-          throw new Error(
-            "Some questions are missing answer options. Please try again."
-          );
-        }
-
-        startQuiz();
-      } catch (parseError) {
-        loadingMessage.textContent =
-          "Error: " + (parseError.message || "Invalid quiz format received");
-        loadingMessage.style.color = "#ef4444";
-        console.error("Parse error:", parseError);
-      }
+    if (
+      correctAnswerLetter.length === 1 &&
+      correctAnswerLetter.match(/[A-Z]/i)
+    ) {
+      correctIndex = correctAnswerLetter.toUpperCase().charCodeAt(0) - 65;
     } else {
-      loadingMessage.textContent =
-        "Error: " + (data.error || "Something went wrong");
-      loadingMessage.style.color = "#ef4444";
+      correctIndex = question.options.findIndex(
+        (opt) => opt === correctAnswerLetter
+      );
     }
-  } catch (error) {
-    loadingMessage.textContent = "Error: Could not connect to server";
-    loadingMessage.style.color = "#ef4444";
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Generate Quiz";
-  }
-}
 
-function startQuiz() {
-  currentQuestionIndex = 0;
-  score = 0;
-  userAnswers = [];
+    if (correctIndex === -1) correctIndex = 0;
 
-  setupScreen.classList.remove("active");
-  quizScreen.classList.add("active");
+    options[selectedIndex].classList.add("selected");
 
-  displayQuestion();
-}
+    if (selectedIndex === correctIndex) {
+      options[selectedIndex].classList.add("correct");
+      score++;
+    } else {
+      options[selectedIndex].classList.add("incorrect");
+      options[correctIndex].classList.add("correct");
+    }
 
-function displayQuestion() {
-  const question = quizData.questions[currentQuestionIndex];
+    userAnswers.push({
+      question: question.question,
+      userAnswer: question.options[selectedIndex],
+      correctAnswer: question.options[correctIndex],
+      isCorrect: selectedIndex === correctIndex,
+    });
 
-  if (
-    !question.options ||
-    !Array.isArray(question.options) ||
-    question.options.length === 0
-  ) {
-    console.error("Question missing options:", question);
-    loadingMessage.textContent =
-      "Error: Question is missing answer options. Please regenerate the quiz.";
-    loadingMessage.style.color = "#ef4444";
-    loadingMessage.classList.add("active");
-    return;
+    nextBtn.disabled = false;
   }
 
-  const progress =
-    ((currentQuestionIndex + 1) / quizData.questions.length) * 100;
-  progressBar.style.width = progress + "%";
+  function handleNextQuestion() {
+    currentQuestionIndex++;
 
-  questionCounter.textContent = `Question ${currentQuestionIndex + 1} of ${
-    quizData.questions.length
-  }`;
-
-  questionText.textContent = question.question;
-
-  optionsContainer.innerHTML = "";
-
-  question.options.forEach((option, index) => {
-    const button = document.createElement("button");
-    button.className = "option-btn";
-    button.textContent = option;
-    button.addEventListener("click", () => selectOption(index));
-    optionsContainer.appendChild(button);
-  });
-
-  nextBtn.disabled = true;
-}
-
-function selectOption(selectedIndex) {
-  const question = quizData.questions[currentQuestionIndex];
-  const options = optionsContainer.querySelectorAll(".option-btn");
-
-  options.forEach((btn) => (btn.disabled = true));
-
-  const correctAnswerLetter = question.correct_answer;
-  let correctIndex;
-
-  if (correctAnswerLetter.length === 1 && correctAnswerLetter.match(/[A-Z]/i)) {
-    correctIndex = correctAnswerLetter.toUpperCase().charCodeAt(0) - 65;
-  } else {
-    correctIndex = question.options.findIndex(
-      (opt) => opt === correctAnswerLetter
-    );
+    if (currentQuestionIndex < quizData.questions.length) {
+      displayQuestion();
+    } else {
+      showResults();
+    }
   }
 
-  if (correctIndex === -1) correctIndex = 0;
+  function showResults() {
+    quizScreen.classList.remove("active");
+    resultsScreen.classList.add("active");
 
-  options[selectedIndex].classList.add("selected");
+    const totalQuestions = quizData.questions.length;
+    const percentage = Math.round((score / totalQuestions) * 100);
 
-  if (selectedIndex === correctIndex) {
-    options[selectedIndex].classList.add("correct");
-    score++;
-  } else {
-    options[selectedIndex].classList.add("incorrect");
-    options[correctIndex].classList.add("correct");
-  }
+    finalScore.textContent = `${percentage}%`;
 
-  userAnswers.push({
-    question: question.question,
-    userAnswer: question.options[selectedIndex],
-    correctAnswer: question.options[correctIndex],
-    isCorrect: selectedIndex === correctIndex,
-  });
-
-  nextBtn.disabled = false;
-}
-
-function handleNextQuestion() {
-  currentQuestionIndex++;
-
-  if (currentQuestionIndex < quizData.questions.length) {
-    displayQuestion();
-  } else {
-    showResults();
-  }
-}
-
-function showResults() {
-  quizScreen.classList.remove("active");
-  resultsScreen.classList.add("active");
-
-  const totalQuestions = quizData.questions.length;
-  const percentage = Math.round((score / totalQuestions) * 100);
-
-  finalScore.textContent = `${percentage}%`;
-
-  scoreSummary.innerHTML = `
+    scoreSummary.innerHTML = `
     <p><strong>Correct Answers:</strong> ${score} out of ${totalQuestions}</p>
     <p><strong>Incorrect Answers:</strong> ${totalQuestions - score}</p>
     <p><strong>Percentage:</strong> ${percentage}%</p>
   `;
-}
+  }
 
-function resetQuiz() {
-  quizData = null;
-  currentQuestionIndex = 0;
-  score = 0;
-  userAnswers = [];
+  function resetQuiz() {
+    quizData = null;
+    currentQuestionIndex = 0;
+    score = 0;
+    userAnswers = [];
 
-  resultsScreen.classList.remove("active");
-  setupScreen.classList.add("active");
+    resultsScreen.classList.remove("active");
+    setupScreen.classList.add("active");
 
-  loadingMessage.classList.remove("active");
-  loadingMessage.style.color = "#6366f1";
+    loadingMessage.classList.remove("active");
+    loadingMessage.style.color = "#6366f1";
 
-  gradeInput.value = "";
-  topicInput.value = "";
-}
+    gradeInput.value = "";
+    topicInput.value = "";
+  }
+})();

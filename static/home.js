@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("themeToggle");
 
   if (themeToggle) {
-    // Auto-detect system preference on first visit
     let currentTheme = localStorage.getItem("theme");
     if (!currentTheme) {
       const prefersDark =

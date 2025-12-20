@@ -13,7 +13,7 @@ API_URL = "https://ai.hackclub.com/proxy/v1/chat/completions"
 
 
 
-MODEL = "openai/gpt-5-mini"
+MODEL = "gpt-5.1"
 
 
 if not AI_KEY:
