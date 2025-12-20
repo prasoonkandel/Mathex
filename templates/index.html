@@ -289,20 +289,16 @@
     <script src="{{ url_for('static', filename='solver.js') }}"></script>
     <script src="{{ url_for('static', filename='quiz.js') }}"></script>
     <script>
-      // SPA Navigation Logic
+      // SPA logic gettin feel of React uhmmm :)
       function showPage(pageName) {
-        // Hide all page sections
         document.querySelectorAll(".page-section").forEach((section) => {
           section.classList.remove("active");
         });
 
-        // Show the selected page section
         const pageSection = document.getElementById("page-" + pageName);
         if (pageSection) {
           pageSection.classList.add("active");
         }
-
-        // Close mobile menu if open
         const hamburger = document.getElementById("hamburger");
         const navLinks = document.getElementById("navLinks");
         if (hamburger && navLinks) {
@@ -310,13 +306,11 @@
           navLinks.classList.remove("active");
         }
 
-        // Special handling for quotes page - load quote on page show
         if (pageName === "quotes" && typeof getQuote === "function") {
           getQuote();
         }
       }
 
-      // Handle navigation clicks
       document.addEventListener("click", (e) => {
         const target = e.target.closest("[data-page]");
         if (target) {
@@ -326,10 +320,8 @@
         }
       });
 
-      // Initialize - show home page
       showPage("home");
 
-      // Quotes functionality
       const quoteText = document.getElementById("quoteText");
       const quoteAuthor = document.getElementById("quoteAuthor");
       const newQuoteBtn = document.getElementById("newQuoteBtn");

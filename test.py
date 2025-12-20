@@ -36,7 +36,7 @@ def quiz_api():
         
         if not description or not grade_level:
             return jsonify({"error": "Description and grade level are required"}), 400
-    
+          
         result = makequiz(f"Generate a quiz for grade {grade_level} on the topic: {description}")
         
         return jsonify({"quiz": result})
@@ -55,3 +55,7 @@ def quotes_api():
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
+
+
+
+
