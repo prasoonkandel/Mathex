@@ -4,5 +4,3 @@
 *.js   linguist-detectable=false
 
 *.py   linguist-language=Python
-
-

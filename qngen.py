@@ -21,13 +21,6 @@ if not AI_KEY:
 
 current_datetime = datetime.now()
 
-commands = {
-
-
-    "bye": "Bye, have a nice day!"
-
-
-}
 
 def initial_prompt(user_message: str):
     return [
@@ -140,12 +133,7 @@ def api_call(messages):
 
 
 def makequiz(user_message: str):
-    for key in commands:
-
-        if key in user_message.lower():
-
-            return commands[key]
-
+   
     try:
         messages = initial_prompt(user_message)
 

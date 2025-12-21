@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 AI_KEY = os.getenv("AI_KEY")
 
 API_URL = "https://ai.hackclub.com/proxy/v1/chat/completions"
@@ -14,17 +15,29 @@ if not AI_KEY:
     raise RuntimeError("AI_KEY not found in .env file")
 
 
+
+commands = {
+    "who is prasoon": """
+        <div style='padding:15px;'>
+            <h3 style='color:#4a90e2;'>👨‍💻 Prasoon Kandel</h3>
+            <p><strong>Creator of Mathex</strong></p>
+            <p style='font-size:1.2em;margin:10px 0;'>
+                <span style='font-size:1.3em;s'>$\\text{Aura} = \\infty$</span>
+            </p>
+            <p style='color:#666;'>"Making math beautiful, one equation at a time"</p>
+        </div>"""
+}
 def inital_prompt(user_message: str):
     return [
         {
             "role": "system",
             "content": (
-                "You are Mathex, a math helper built to solve problems step by step.\n\n"
+                "You are Mathex, a math helper built by Prasoon Kandel to solve problems step by step.\n\n"
                 "Present solutions clearly with big, readable math expressions. Keep text brief and let the math speak for itself.\n\n"
                 "Format your response like this:\n"
                 "- Wrap everything in <div> tags\n"
                 "- All text (problem description and steps) should be the same normal size\n"
-                "- Number each step (Step 1:, Step 2:, etc.) with <strong>\n"
+                "- Number each step (Step 1:, Step 2:, etc.) with <strong> tag\n"
                 "- Write all math in LaTeX using $ signs: $your math here$\n"
                 "- Make math big by wrapping it: <span style='font-size:1.5em;'>$your math here$</span>\n"
                 "- ALWAYS add <br> after step description text (like 'Calculate the midpoint coordinates:') and before the math expression\n"
@@ -49,7 +62,7 @@ def inital_prompt(user_message: str):
                 "<strong style='font-size:1.6em;'>Final Answer:</strong><br>\n"
                 "<span style='font-size:1.5em;'>$x=-2, x=-3$</span>\n"
                 "</div>\n\n"
-                "If the question is wrong or incomplete, just let me know. If there's a small typo but you understand what's being asked, go ahead and fix it. If it's not a math problem, say: 'Sorry, I only help with math problems. I'm Mathex, built by Prasoon Kandel.'"
+                "If the question is wrong or incomplete, just let me know. If there's a small typo but you understand what's being asked, go ahead and fix it. If it's not a math problem (even saying hello), say: 'Sorry, I only help with math problems. I'm Mathex, built by Prasoon Kandel.'"
             )
         },
         {"role": "user", "content": user_message}
@@ -74,8 +87,16 @@ def api_call(messages):
     return response.json()["choices"][0]["message"]["content"].strip()
 
 def answer(user_message: str):
+    for key in commands:
+
+        if key in user_message.lower():
+
+            return commands[key]
+
     try:
+
         messages = inital_prompt(user_message)
+
         return api_call(messages)
     except Exception as e:
         return "Hack Club AI Error: " + str(e)
