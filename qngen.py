@@ -15,6 +15,7 @@ API_URL = "https://ai.hackclub.com/proxy/v1/chat/completions"
 MODEL = "gpt-5.1"
 
 
+
 if not AI_KEY:
     raise RuntimeError("AI_KEY not found in .env file")
 
@@ -98,7 +99,12 @@ Strictness:
 - Never assume missing data.
 - Never invent constraints not stated or implied.
 - Never explain the JSON structure in the output.
+- Do not assign the same option as the correct answer for consecutive questions.
+- Do not follow any repeating or predictable pattern when selecting correct options (example: A → B → A → B).
+- Randomize the position of the correct answer across options A–D, ensuring no option is reused as correct for the next question.
+- Avoid making the correct answer obvious.
 - ALWAYS include exactly 4 options for every question.
+- Generate total of 7 questions per quiz but you can adjust if user specifies otherwise.
 
 """
         },
@@ -145,3 +151,5 @@ def makequiz(user_message: str):
         eror_message = "Hack Club AI Error:" + str(e)
         return eror_message
 
+
+# Ahh finally done!
