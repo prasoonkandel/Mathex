@@ -1,0 +1,3 @@
+# Marking this as a Python project while keeping other languages visible....  :) I dont wanna see CSS thing on my Github Repo page
+*.py linguist-language=Python
+

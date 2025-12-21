@@ -43,6 +43,8 @@ IMPORTANT: ALL questions MUST be multiple choice with EXACTLY 4 options.
 Output rules:
 - Output VALID JSON ONLY.
 - Do NOT include explanations outside the JSON.
+- Do NOT make correct answer too easy to guess.
+- Do NOT make correct answer same option for all questions.
 - Do NOT include comments or trailing commas.
 - Use UTF-8 math symbols only if necessary.
 

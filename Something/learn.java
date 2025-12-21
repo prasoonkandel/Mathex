@@ -95,8 +95,7 @@ public class learn {
 
         }
               scanner.close();
+    }}
 
-    }
 
 
-}
