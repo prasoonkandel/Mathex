@@ -40,10 +40,9 @@ AI powered software to help you in your homeworks. Still in development phase
 
 5. **Run the Project**
    ```bash
-   python test.py
+   python main.py
    ```
 
 ---
 
 **Ready to contribute? Fork the repo and start coding! 🚀**
-
