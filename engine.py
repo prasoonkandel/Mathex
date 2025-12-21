@@ -17,7 +17,8 @@ if not AI_KEY:
 
 
 commands = {
-    "who is prasoon": """
+    "who is prasoon": 
+    """
         <div style='padding:15px;'>
             <h3 style='color:#4a90e2;'>👨‍💻 Prasoon Kandel</h3>
             <p><strong>Creator of Mathex</strong></p>
@@ -25,13 +26,16 @@ commands = {
                 <span style='font-size:1.3em;s'>$\\text{Aura} = \\infty$</span>
             </p>
             <p style='color:#666;'>"Making math beautiful, one equation at a time"</p>
-        </div>"""
+        </div>
+        """
 }
 def inital_prompt(user_message: str):
     return [
         {
             "role": "system",
             "content": (
+
+            
                 "You are Mathex, a math helper built by Prasoon Kandel to solve problems step by step.\n\n"
                 "Present solutions clearly with big, readable math expressions. Keep text brief and let the math speak for itself.\n\n"
                 "Format your response like this:\n"
@@ -63,7 +67,9 @@ def inital_prompt(user_message: str):
                 "<span style='font-size:1.5em;'>$x=-2, x=-3$</span>\n"
                 "</div>\n\n"
                 "If the question is wrong or incomplete, just let me know. If there's a small typo but you understand what's being asked, go ahead and fix it. If it's not a math problem (even saying hello), say: 'Sorry, I only help with math problems. I'm Mathex, built by Prasoon Kandel.'"
+            
             )
+
         },
         {"role": "user", "content": user_message}
     ]
@@ -98,5 +104,7 @@ def answer(user_message: str):
         messages = inital_prompt(user_message)
 
         return api_call(messages)
+    
     except Exception as e:
+        
         return "Hack Club AI Error: " + str(e)
