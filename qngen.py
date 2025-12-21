@@ -115,6 +115,8 @@ Strictness:
     ]
 
 
+
+
 def api_call(messages):
     headers = {
         "Authorization": f"Bearer {AI_KEY}",
@@ -126,7 +128,8 @@ def api_call(messages):
 
         "model": MODEL,
         "messages": messages,
-        "temperature": 0.2,
+        "temperature": 0.8,
+        "max_tokens": 1000
 
     
     }

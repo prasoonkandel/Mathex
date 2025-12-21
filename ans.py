@@ -45,4 +45,3 @@ def mathex():
 
 if __name__ == "__main__":
     mathex()
-

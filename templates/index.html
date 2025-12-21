@@ -24,6 +24,10 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='quotes.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='formula.css') }}"
+    />
     <script>
       window.MathJax = {
         tex: {
@@ -57,6 +61,7 @@
         <ul class="nav-links" id="navLinks">
           <li><a href="#" data-page="home">Home</a></li>
           <li><a href="#" data-page="solver">Solver</a></li>
+          <li><a href="#" data-page="formula">Formulas</a></li>
           <li><a href="#" data-page="quiz">Quiz</a></li>
           <li><a href="#" data-page="quotes">Quotes</a></li>
           <li>
@@ -106,6 +111,18 @@
                 for studying and practice.
               </p>
               <a href="#" data-page="quiz" class="tool-link">Generate Quiz →</a>
+            </div>
+
+            <div class="tool-card">
+              <h3>Formula Library</h3>
+              <p>
+                Search and discover mathematical formulas instantly. Get clean
+                LaTeX formatted formulas with brief explanations for any math
+                concept.
+              </p>
+              <a href="#" data-page="formula" class="tool-link"
+                >Find Formulas →</a
+              >
             </div>
 
             <div class="tool-card">
@@ -291,6 +308,39 @@
       </div>
     </section>
 
+    <section id="page-formula" class="page-section">
+      <div class="content">
+        <div class="container">
+          <a href="#" data-page="home" class="back-to-home">← Back to Home</a>
+          <h1>Formula Library</h1>
+          <p class="subtitle">Search for any mathematical formula</p>
+
+          <div id="formulaInputArea">
+            <form id="formulaForm">
+              <input
+                type="text"
+                id="formulaQuery"
+                placeholder="quadratic formula, pythagorean theorem, area of circle..."
+                required
+              />
+              <button type="submit" id="formulaSubmitBtn">Get Formula</button>
+            </form>
+          </div>
+
+          <div id="formulaResultArea" style="display: none">
+            <div id="formulaResult" class="formula-result"></div>
+            <button
+              type="button"
+              id="searchAnotherBtn"
+              class="search-another-btn"
+            >
+              Search Another Formula
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="page-quotes" class="page-section">
       <div class="content">
         <div class="container">
@@ -315,6 +365,7 @@
 
     <script src="{{ url_for('static', filename='home.js') }}"></script>
     <script src="{{ url_for('static', filename='solver.js') }}"></script>
+    <script src="{{ url_for('static', filename='formula.js') }}"></script>
     <script src="{{ url_for('static', filename='quiz.js') }}"></script>
     <script>
       function showPage(pageName) {

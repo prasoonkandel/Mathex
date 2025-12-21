@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from engine import answer
 from qngen import makequiz
 from quotes import quotes as get_quote
+from formula import get_4mula
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -52,6 +53,23 @@ def quotes_api():
         return jsonify(quote_data)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+
+@app.route("/api/formula", methods=["POST"])
+def formula():
+    try:
+        data = request.get_json()
+        formula_query = data.get("formula", "")
+        
+        if not formula_query:
+            return jsonify({"error": "No formula requested"}), 400
+    
+        result = get_4mula(formula_query)
+        
+        return jsonify({"formula": result})
+    
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500    
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
