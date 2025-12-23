@@ -62,7 +62,6 @@ def formula_api():
         query = data.get("formula", "")
         grade = data.get("grade_level")
 
-
         if not query:
             return jsonify({"error": "No formula query provided"}), 400
         formula_result = get_4mula(query, grade)

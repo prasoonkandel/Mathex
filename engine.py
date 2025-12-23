@@ -17,6 +17,7 @@ if not AI_KEY:
 
 
 commands = {
+# Easter Eggs   
     "who is prasoon": 
     """
         <div style='padding:15px;'>
@@ -24,6 +25,17 @@ commands = {
             <p><strong>Creator of Mathex</strong></p>
             <p style='font-size:1.2em;margin:10px 0;'>
                 <span style='font-size:1.3em;s'>$\\text{Aura} = \\infty$</span>
+            </p>
+            <p style='color:#666;'>"Making math beautiful, one equation at a time"</p>
+        </div>
+        """,
+    "Radha Krishna": 
+    """
+        <div style='padding:15px;'>
+            <h3 style='color:#4a90e2;'>Radha Krishna</h3>
+            <p><strong>Universal Expression</strong></p>
+            <p style='font-size:1.2em;margin:10px 0;'>
+                <span style='font-size:1.3em;s'>$\\text{Radha} = \\text{Krishna}$</span>
             </p>
             <p style='color:#666;'>"Making math beautiful, one equation at a time"</p>
         </div>
