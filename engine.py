@@ -28,6 +28,7 @@ commands = {
             </p>
             <p style='color:#666;'>"Making math beautiful, one equation at a time"</p>
         </div>
+        
         """,
     "Radha Krishna": 
     """

@@ -4,3 +4,5 @@
 *.pyc
 .env
 /personal
+test.py
+test.png
