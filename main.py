@@ -56,17 +56,21 @@ def quotes_api():
     
 
 @app.route("/api/formula", methods=["POST"])
-def formula():
+def formula_api():
     try:
         data = request.get_json()
-        formula_query = data.get("formula", "")
-        
-        if not formula_query:
-            return jsonify({"error": "No formula requested"}), 400
-    
-        result = get_4mula(formula_query)
-        
-        return jsonify({"formula": result})
+        query = data.get("formula", "")
+        grade = data.get("grade_level")
+
+
+        if not query:
+            return jsonify({"error": "No formula query provided"}), 400
+        formula_result = get_4mula(query, grade)
+      
+        return jsonify({
+            "formula": formula_result,
+            "grade_level": grade
+        })
     
     except Exception as e:
         return jsonify({"error": str(e)}), 500    

@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     formulaForm.addEventListener("submit", async function (e) {
       e.preventDefault();
       const query = formulaQuery.value.trim();
+      const gradeLevel = document.getElementById("formulaGradeLevel").value;
 
       if (!query) {
         alert("Please enter a formula to search for.");
@@ -24,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const response = await fetch("/api/formula", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ formula: query }),
+          body: JSON.stringify({ formula: query, grade_level: gradeLevel }),
         });
 
         const data = await response.json();

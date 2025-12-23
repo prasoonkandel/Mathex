@@ -13,13 +13,15 @@ MODEL = "gpt-5.1"
 if not AI_KEY:
     raise RuntimeError("AI_KEY not found in .env file")
 
-def formula_prompt(user_message: str):
+def formula_prompt(user_message: str, grade:str):
     return [
         {
             "role": "system",
             "content": (
                 "You are Mathex Formula Helper, built by Prasoon Kandel to provide mathematical formulas.\n\n"
                 "When asked for a formula, provide ONLY the formula in clean LaTeX format with a brief description.\n\n"
+                f"Provide formula according to the user's grade level: {grade}\n\n"
+                f"Provide the forlmula which are most relevant to {grade} level, use simple mathmatical symbols for early highschool and under.\n\n"
                 "Format your response like this:\n"
                 "- Wrap everything in <div> tags\n"
                 "- Start with a brief formula name/title in <strong> tag\n"
@@ -57,9 +59,11 @@ def api_call(messages):
         "Content-Type": "application/json"
     }
     payload = {
+
         "model": MODEL,
         "messages": messages,
-        "temperature": 0.2
+        "temperature": 0.3
+
     }
 
     response = requests.post(API_URL, headers=headers, json=payload)
@@ -67,9 +71,9 @@ def api_call(messages):
     return response.json()["choices"][0]["message"]["content"].strip()
 
 
-def get_4mula(user_message: str):
+def get_4mula(user_message: str, grade: str = "high school"):
     try:
-        messages = formula_prompt(user_message)
+        messages = formula_prompt(user_message, grade)
         return api_call(messages)
     except Exception as e:
         return "Hack Club AI Error: " + str(e)

@@ -42,6 +42,7 @@ def inital_prompt(user_message: str):
                 "- Wrap everything in <div> tags\n"
                 "- All text (problem description and steps) should be the same normal size\n"
                 "- Number each step (Step 1:, Step 2:, etc.) with <strong> tag\n"
+                "- For bold text, ALWAYS use HTML <strong> or <b> tags, NEVER use Markdown ** syntax\n"
                 "- Write all math in LaTeX using $ signs: $your math here$\n"
                 "- Make math big by wrapping it: <span style='font-size:1.5em;'>$your math here$</span>\n"
                 "- ALWAYS add <br> after step description text (like 'Calculate the midpoint coordinates:') and before the math expression\n"
