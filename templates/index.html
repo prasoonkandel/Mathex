@@ -32,6 +32,10 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='distance.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='barchart.css') }}"
+    />
     <script>
       window.MathJax = {
         tex: {
@@ -154,13 +158,13 @@
               <h4>Distance Converter</h4>
               <p>Convert between distance units</p>
             </div>
-            <div class="mini-tool-card" data-page="others">
-              <h4>Geometry Calculator</h4>
-              <p>Calculate area, perimeter, volume</p>
+            <div class="mini-tool-card" data-page="barchart">
+              <h4>Bar Chart Maker</h4>
+              <p>Create beautiful bar charts</p>
             </div>
             <div class="mini-tool-card" data-page="others">
-              <h4>Statistics Tool</h4>
-              <p>Mean, median, mode, standard deviation</p>
+              <h4>Equation Solver</h4>
+              <p>Coming soon</p>
             </div>
           </div>
           <a href="#" data-page="others" class="see-more-link"
@@ -389,6 +393,142 @@
       </div>
     </section>
 
+    <section id="page-barchart" class="page-section">
+      <div class="content">
+        <div class="container">
+          <a href="#" data-page="home" class="back-to-home">← Back to Home</a>
+          <h1>Bar Chart Generator</h1>
+          <p class="subtitle">Create beautiful bar charts with your data</p>
+
+          <div class="barchart-input-section">
+            <div class="input-group">
+              <label for="chartTitle">Chart Title</label>
+              <input
+                type="text"
+                id="chartTitle"
+                placeholder="e.g., Student Marks Analysis"
+                value="Bar Chart"
+              />
+            </div>
+
+            <div class="input-row">
+              <div class="input-group">
+                <label for="chartXLabel">X-Axis Label</label>
+                <input
+                  type="text"
+                  id="chartXLabel"
+                  placeholder="e.g., Students"
+                  value="Categories"
+                />
+              </div>
+
+              <div class="input-group">
+                <label for="chartYLabel">Y-Axis Label</label>
+                <input
+                  type="text"
+                  id="chartYLabel"
+                  placeholder="e.g., Marks"
+                  value="Values"
+                />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="chartColor">Bar Color</label>
+              <input type="color" id="chartColor" value="#B52605" />
+            </div>
+
+            <div class="data-input-section">
+              <h3>Enter Your Data</h3>
+              <div id="dataInputs">
+                <div class="data-row">
+                  <input
+                    type="text"
+                    class="data-label"
+                    placeholder="Label (e.g., John)"
+                    value="Item 1"
+                  />
+                  <input
+                    type="number"
+                    class="data-value"
+                    placeholder="Value"
+                    value="10"
+                    step="any"
+                    inputmode="decimal"
+                  />
+                  <button class="remove-data-btn" onclick="removeDataRow(this)">
+                    ✕
+                  </button>
+                </div>
+                <div class="data-row">
+                  <input
+                    type="text"
+                    class="data-label"
+                    placeholder="Label (e.g., Sarah)"
+                    value="Item 2"
+                  />
+                  <input
+                    type="number"
+                    class="data-value"
+                    placeholder="Value"
+                    value="15"
+                    step="any"
+                    inputmode="decimal"
+                  />
+                  <button class="remove-data-btn" onclick="removeDataRow(this)">
+                    ✕
+                  </button>
+                </div>
+                <div class="data-row">
+                  <input
+                    type="text"
+                    class="data-label"
+                    placeholder="Label (e.g., Mike)"
+                    value="Item 3"
+                  />
+                  <input
+                    type="number"
+                    class="data-value"
+                    placeholder="Value"
+                    value="12"
+                    step="any"
+                    inputmode="decimal"
+                  />
+                  <button class="remove-data-btn" onclick="removeDataRow(this)">
+                    ✕
+                  </button>
+                </div>
+              </div>
+              <button id="addDataBtn" class="add-data-btn">+ Add Row</button>
+            </div>
+
+            <button id="generateChartBtn" class="generate-chart-btn">
+              Generate Chart
+            </button>
+          </div>
+
+          <div id="chartResultArea" style="display: none">
+            <div class="chart-display">
+              <img id="chartImage" alt="Generated Bar Chart" />
+              <div class="chart-actions">
+                <button id="saveChartBtn" class="save-chart-btn">
+                  💾 Save Chart
+                </button>
+                <button id="createNewChartBtn" class="create-new-chart-btn">
+                  Create New Chart
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div id="chartLoading" class="loading-spinner" style="display: none">
+            <div class="spinner"></div>
+            <p>Generating your chart...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="page-others" class="page-section">
       <div class="content">
         <div class="container">
@@ -400,6 +540,18 @@
 
           <div class="tools-grid">
             <div class="tool-card">
+              <h3>Bar Chart Generator</h3>
+              <p>
+                Create beautiful, customizable bar charts for your data. Perfect
+                for visualizing statistics, grades, and comparisons. Save charts
+                to your computer.
+              </p>
+              <a href="#" data-page="barchart" class="tool-link"
+                >Create Chart →</a
+              >
+            </div>
+
+            <div class="tool-card">
               <h3>Distance Converter</h3>
               <p>
                 Convert between distance measurement units: miles, kilometers,
@@ -409,28 +561,10 @@
             </div>
 
             <div class="tool-card">
-              <h3>Geometry Calculator</h3>
+              <h3>Equation Solver</h3>
               <p>
-                Calculate area, perimeter, and volume for various geometric
-                shapes including circles, triangles, and spheres.
-              </p>
-              <button class="tool-link" disabled>Coming Soon</button>
-            </div>
-
-            <div class="tool-card">
-              <h3>Statistics Tool</h3>
-              <p>
-                Compute statistical measures like mean, median, mode, range, and
-                standard deviation from your data.
-              </p>
-              <button class="tool-link" disabled>Coming Soon</button>
-            </div>
-
-            <div class="tool-card">
-              <h3>Number Theory</h3>
-              <p>
-                Explore prime numbers, factors, GCD, LCM, and other number
-                theory concepts.
+                Solve linear, quadratic, and system of equations with
+                step-by-step solutions.
               </p>
               <button class="tool-link" disabled>Coming Soon</button>
             </div>
@@ -440,15 +574,6 @@
               <p>
                 Visualize mathematical functions and equations with interactive
                 graphs and critical point analysis.
-              </p>
-              <button class="tool-link" disabled>Coming Soon</button>
-            </div>
-
-            <div class="tool-card">
-              <h3>Matrix Calculator</h3>
-              <p>
-                Perform matrix operations including addition, multiplication,
-                determinant, and inverse calculations.
               </p>
               <button class="tool-link" disabled>Coming Soon</button>
             </div>
@@ -517,6 +642,7 @@
     <script src="{{ url_for('static', filename='formula.js') }}"></script>
     <script src="{{ url_for('static', filename='quiz.js') }}"></script>
     <script src="{{ url_for('static', filename='distance.js') }}"></script>
+    <script src="{{ url_for('static', filename='barchart.js') }}"></script>
     <script>
       function showPage(pageName) {
         document.querySelectorAll(".page-section").forEach((section) => {

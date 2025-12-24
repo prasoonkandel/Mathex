@@ -4,6 +4,7 @@ from Backend.qngen import makequiz
 from quotes import quotes as get_quote
 from Backend.formula import get_4mula
 from flask_cors import CORS
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -73,6 +74,45 @@ def formula_api():
     
     except Exception as e:
         return jsonify({"error": str(e)}), 500    
+
+@app.route("/api/barchart", methods=["POST"])
+def barchart_api():
+    try:
+        import importlib.util
+        import os
+        
+        # Load the bar-chart module
+        spec = importlib.util.spec_from_file_location(
+            "bar_chart",
+            os.path.join(os.path.dirname(__file__), "Backend", "bar-chart.py")
+        )
+        bar_chart = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(bar_chart)
+        
+        data = request.get_json()
+        labels = data.get("labels", [])
+        values = data.get("values", [])
+        xlabel = data.get("xlabel", "Categories")
+        ylabel = data.get("ylabel", "Values")
+        title = data.get("title", "Bar Chart")
+        color = data.get("color", "#B52605")
+        
+        if not labels or not values:
+            return jsonify({"error": "Labels and values are required"}), 400
+        
+        if len(labels) != len(values):
+            return jsonify({"error": "Labels and values must have the same length"}), 400
+        
+        # Generate chart
+        img_base64 = bar_chart.generate_chart(labels, values, xlabel, ylabel, title, color)
+        
+        return jsonify({
+            "image": f"data:image/png;base64,{img_base64}",
+            "success": True
+        })
+    
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)

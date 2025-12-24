@@ -166,12 +166,12 @@ function performConversion() {
     formulaText.innerHTML =
       '<span class="error-text">⚠️ Invalid conversion</span>';
   } else {
-    toValueInput.value = result.toFixed(6);
+    toValueInput.value = result.toFixed(2);
     formulaText.innerHTML = `
       <span class="conversion-from">${fromValue}</span> 
       <span class="conversion-unit">${getUnitName(fromUnit)}</span>
       <span class="conversion-equals">=</span>
-      <span class="conversion-to">${result.toFixed(6)}</span> 
+      <span class="conversion-to">${result.toFixed(2)}</span> 
       <span class="conversion-unit">${getUnitName(toUnit)}</span>
     `;
   }

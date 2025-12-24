@@ -49,7 +49,6 @@
 .converter-box select:focus {
   outline: none;
   border-color: var(--accent-color);
-  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
 }
 
 .converter-box input[readonly] {
@@ -88,21 +87,18 @@
   height: 50px;
   font-size: 1.5rem;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: background 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 }
 
 .swap-btn:hover {
   background: var(--accent-hover);
-  transform: rotate(180deg) scale(1.1);
-  box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
 }
 
 .swap-btn:active {
-  transform: rotate(180deg) scale(0.95);
+  background: var(--accent-hover);
 }
 
 .conversion-info {
@@ -110,7 +106,7 @@
   margin: 2rem auto;
   padding: 1.5rem;
   background: var(--card-bg);
-  border-left: 4px solid var(--accent-color);
+
   border-radius: 8px;
   text-align: center;
 }
@@ -159,7 +155,6 @@
   font-style: italic;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .converter-container {
     grid-template-columns: 1fr;
@@ -171,11 +166,11 @@
   }
 
   .swap-btn:hover {
-    transform: rotate(270deg) scale(1.1);
+    background: var(--accent-hover);
   }
 
   .swap-btn:active {
-    transform: rotate(270deg) scale(0.95);
+    background: var(--accent-hover);
   }
 
   .converter-box {
