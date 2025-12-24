@@ -1,4 +1,4 @@
-from qngen import answer  
+from Backend.qngen import answer  
 
 # ==== demo question for testing ==== # (it was in my book XD)
 

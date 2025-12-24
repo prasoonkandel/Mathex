@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify, render_template
-from engine import answer
-from qngen import makequiz
+from Backend.engine import answer
+from Backend.qngen import makequiz
 from quotes import quotes as get_quote
-from formula import get_4mula
+from Backend.formula import get_4mula
 from flask_cors import CORS
 
 app = Flask(__name__)
