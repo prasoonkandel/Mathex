@@ -28,6 +28,10 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='formula.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='distance.css') }}"
+    />
     <script>
       window.MathJax = {
         tex: {
@@ -61,9 +65,9 @@
         <ul class="nav-links" id="navLinks">
           <li><a href="#" data-page="home">Home</a></li>
           <li><a href="#" data-page="solver">Solver</a></li>
-          <li><a href="#" data-page="formula">Formulas</a></li>
           <li><a href="#" data-page="quiz">Quiz</a></li>
-          <li><a href="#" data-page="quotes">Quotes</a></li>
+          <li><a href="#" data-page="formula">Formula</a></li>
+          <li><a href="#" data-page="others">Others</a></li>
           <li>
             <button
               class="theme-toggle"
@@ -93,9 +97,10 @@
         </section>
 
         <section class="tools-section" id="tools">
-          <h2>Our Tools</h2>
+          <h2>Main Mathex Tools</h2>
           <div class="tools-grid">
             <div class="tool-card">
+              <div class="tool-badge">Core Tool</div>
               <h3>Math Solver</h3>
               <p>
                 Get step-by-step solutions to complex math problems. From
@@ -105,6 +110,7 @@
             </div>
 
             <div class="tool-card">
+              <div class="tool-badge">Core Tool</div>
               <h3>Quiz Generator</h3>
               <p>
                 Create customized quizzes for any grade level and topic. Perfect
@@ -114,6 +120,7 @@
             </div>
 
             <div class="tool-card">
+              <div class="tool-badge">Core Tool</div>
               <h3>Formula Library</h3>
               <p>
                 Search and discover mathematical formulas instantly. Get clean
@@ -124,17 +131,41 @@
                 >Find Formulas →</a
               >
             </div>
+          </div>
+        </section>
 
-            <div class="tool-card">
-              <h3>Math Quotes</h3>
-              <p>
-                Get inspired with mathematical insights and quotes from famous
-                mathematicians and thinkers. Take a moment to appreciate the
-                beauty of math.
-              </p>
-              <a href="#" data-page="quotes" class="tool-link">Go ahead →</a>
+        <section class="quotes-section">
+          <h2>Mathematical Inspiration</h2>
+          <div class="quote-card">
+            <div class="quote-icon">"</div>
+            <p id="quoteText" class="quote-text">Loading quote...</p>
+            <p id="quoteAuthor" class="quote-author"></p>
+          </div>
+          <button id="newQuoteBtn" class="btn-primary">Get New Quote</button>
+        </section>
+
+        <section class="useful-tools-section">
+          <h2>Useful Math Tools</h2>
+          <p class="section-subtitle">
+            Explore additional mathematical utilities and calculators
+          </p>
+          <div class="tools-preview">
+            <div class="mini-tool-card" data-page="distance">
+              <h4>Distance Converter</h4>
+              <p>Convert between distance units</p>
+            </div>
+            <div class="mini-tool-card" data-page="others">
+              <h4>Geometry Calculator</h4>
+              <p>Calculate area, perimeter, volume</p>
+            </div>
+            <div class="mini-tool-card" data-page="others">
+              <h4>Statistics Tool</h4>
+              <p>Mean, median, mode, standard deviation</p>
             </div>
           </div>
+          <a href="#" data-page="others" class="see-more-link"
+            >See All Tools →</a
+          >
         </section>
       </main>
     </section>
@@ -358,22 +389,123 @@
       </div>
     </section>
 
-    <section id="page-quotes" class="page-section">
+    <section id="page-others" class="page-section">
       <div class="content">
         <div class="container">
           <a href="#" data-page="home" class="back-to-home">← Back to Home</a>
-          <h1>Math Quotes</h1>
-          <p class="subtitle">Get inspired by mathematical wisdom</p>
+          <h1>Useful Math Tools</h1>
+          <p class="subtitle">
+            Additional mathematical utilities and calculators
+          </p>
 
-          <div class="quote-card">
-            <div class="quote-icon">"</div>
-            <p id="quoteText" class="quote-text">
-              Click the button below to get a random math quote
-            </p>
-            <p id="quoteAuthor" class="quote-author"></p>
+          <div class="tools-grid">
+            <div class="tool-card">
+              <h3>Distance Converter</h3>
+              <p>
+                Convert between distance measurement units: miles, kilometers,
+                meters, feet, inches, centimeters, and millimeters.
+              </p>
+              <a href="#" data-page="distance" class="tool-link">Try Now →</a>
+            </div>
+
+            <div class="tool-card">
+              <h3>Geometry Calculator</h3>
+              <p>
+                Calculate area, perimeter, and volume for various geometric
+                shapes including circles, triangles, and spheres.
+              </p>
+              <button class="tool-link" disabled>Coming Soon</button>
+            </div>
+
+            <div class="tool-card">
+              <h3>Statistics Tool</h3>
+              <p>
+                Compute statistical measures like mean, median, mode, range, and
+                standard deviation from your data.
+              </p>
+              <button class="tool-link" disabled>Coming Soon</button>
+            </div>
+
+            <div class="tool-card">
+              <h3>Number Theory</h3>
+              <p>
+                Explore prime numbers, factors, GCD, LCM, and other number
+                theory concepts.
+              </p>
+              <button class="tool-link" disabled>Coming Soon</button>
+            </div>
+
+            <div class="tool-card">
+              <h3>Graph Plotter</h3>
+              <p>
+                Visualize mathematical functions and equations with interactive
+                graphs and critical point analysis.
+              </p>
+              <button class="tool-link" disabled>Coming Soon</button>
+            </div>
+
+            <div class="tool-card">
+              <h3>Matrix Calculator</h3>
+              <p>
+                Perform matrix operations including addition, multiplication,
+                determinant, and inverse calculations.
+              </p>
+              <button class="tool-link" disabled>Coming Soon</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="page-distance" class="page-section">
+      <div class="content">
+        <div class="container">
+          <a href="#" data-page="home" class="back-to-home">← Back to Home</a>
+          <h1>Distance Converter</h1>
+          <p class="subtitle">Convert between distance units instantly</p>
+
+          <div class="converter-container">
+            <div class="converter-box">
+              <label for="fromValue">From</label>
+              <input
+                type="number"
+                id="fromValue"
+                placeholder="Enter value"
+                step="any"
+              />
+              <select id="fromUnit">
+                <option value="m">Meters (m)</option>
+                <option value="km">Kilometers (km)</option>
+                <option value="cm">Centimeters (cm)</option>
+                <option value="mm">Millimeters (mm)</option>
+                <option value="mile">Miles</option>
+                <option value="foot">Feet</option>
+                <option value="inch">Inches</option>
+              </select>
+            </div>
+
+            <div class="converter-swap">
+              <button id="swapBtn" class="swap-btn">⇄</button>
+            </div>
+
+            <div class="converter-box">
+              <label for="toValue">To</label>
+              <input type="number" id="toValue" placeholder="Result" readonly />
+              <select id="toUnit">
+                <option value="km">Kilometers (km)</option>
+                <option value="m">Meters (m)</option>
+                <option value="cm">Centimeters (cm)</option>
+                <option value="mm">Millimeters (mm)</option>
+                <option value="mile">Miles</option>
+                <option value="foot">Feet</option>
+                <option value="inch">Inches</option>
+              </select>
+            </div>
           </div>
 
-          <button id="newQuoteBtn" class="btn-primary">Get New Quote</button>
+          <div class="conversion-info">
+            <p id="conversionFormula"></p>
+          </div>
         </div>
       </div>
     </section>
@@ -384,6 +516,7 @@
     <script src="{{ url_for('static', filename='solver.js') }}"></script>
     <script src="{{ url_for('static', filename='formula.js') }}"></script>
     <script src="{{ url_for('static', filename='quiz.js') }}"></script>
+    <script src="{{ url_for('static', filename='distance.js') }}"></script>
     <script>
       function showPage(pageName) {
         document.querySelectorAll(".page-section").forEach((section) => {
@@ -401,9 +534,13 @@
           navLinks.classList.remove("active");
         }
 
-        if (pageName === "quotes" && typeof getQuote === "function") {
-          getQuote();
-        }
+        // Smooth scroll to top on all pages
+        setTimeout(() => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        }, 50);
       }
 
       document.addEventListener("click", (e) => {
@@ -420,6 +557,10 @@
       const quoteText = document.getElementById("quoteText");
       const quoteAuthor = document.getElementById("quoteAuthor");
       const newQuoteBtn = document.getElementById("newQuoteBtn");
+
+      if (quoteText && quoteAuthor) {
+        getQuote();
+      }
 
       async function getQuote() {
         newQuoteBtn.disabled = true;

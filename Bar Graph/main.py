@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+
 import numpy as np
 
 # This is a bar graph for English marks of students 
@@ -35,9 +36,7 @@ def plotgraph(x,y):
 def savefile():
     plt.savefig("test.png", dpi=300, bbox_inches="tight")
 
-
 n = int(input("Enter number of students: "))
-
 names = []
 marks = []
 
