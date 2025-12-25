@@ -22,34 +22,8 @@ window.removePieDataRow = function (button) {
   }
 };
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Add data button
-  const addPieDataBtn = document.getElementById("addPieDataBtn");
-  if (addPieDataBtn) {
-    addPieDataBtn.addEventListener("click", addPieDataRow);
-  }
-
-  // Generate chart button
-  const generatePieChartBtn = document.getElementById("generatePieChartBtn");
-  if (generatePieChartBtn) {
-    generatePieChartBtn.addEventListener("click", generatePieChart);
-  }
-
-  // Save chart button
-  const savePieChartBtn = document.getElementById("savePieChartBtn");
-  if (savePieChartBtn) {
-    savePieChartBtn.addEventListener("click", savePieChart);
-  }
-
-  // Create new chart button
-  const createNewPieChartBtn = document.getElementById("createNewPieChartBtn");
-  if (createNewPieChartBtn) {
-    createNewPieChartBtn.addEventListener("click", createNewPieChart);
-  }
-});
-
-// Generate pie chart
-async function generatePieChart() {
+// Generate pie chart - make it global
+window.generatePieChart = async function () {
   const title = document.getElementById("pieChartTitle").value.trim();
 
   // Collect data from rows
@@ -97,6 +71,8 @@ async function generatePieChart() {
   loadingArea.style.display = "block";
 
   try {
+    console.log("Generating pie chart with data:", { labels, values, title });
+
     const response = await fetch(API_ENDPOINTS.piechart, {
       method: "POST",
       headers: {
@@ -109,7 +85,16 @@ async function generatePieChart() {
       }),
     });
 
+    console.log("Response status:", response.status);
+
+    if (!response.ok) {
+      throw new Error(
+        `Server error: ${response.status} ${response.statusText}`
+      );
+    }
+
     const data = await response.json();
+    console.log("Response data:", data);
 
     if (data.error) {
       throw new Error(data.error);
@@ -121,6 +106,11 @@ async function generatePieChart() {
 
     loadingArea.style.display = "none";
     resultArea.style.display = "block";
+
+    // Scroll to top smoothly after DOM updates
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 100);
   } catch (error) {
     console.error("Error generating pie chart:", error);
     alert("Error generating pie chart: " + error.message);
@@ -128,7 +118,7 @@ async function generatePieChart() {
     loadingArea.style.display = "none";
     inputArea.style.display = "block";
   }
-}
+};
 
 // Save chart as image
 function savePieChart() {
@@ -145,11 +135,11 @@ function savePieChart() {
   document.body.removeChild(link);
 }
 
-// Create new chart
-function createNewPieChart() {
+// Create new pie chart
+window.createNewPieChart = function () {
   const inputArea = document.querySelector(".piechart-input-section");
   const resultArea = document.getElementById("pieChartResultArea");
 
   resultArea.style.display = "none";
   inputArea.style.display = "block";
-}
+};

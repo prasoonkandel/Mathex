@@ -22,39 +22,15 @@ window.removeDataRow = function (button) {
   }
 };
 
-document.addEventListener("DOMContentLoaded", function () {
-  const addDataBtn = document.getElementById("addDataBtn");
-  if (addDataBtn) {
-    addDataBtn.addEventListener("click", addDataRow);
-  }
-
-  const generateChartBtn = document.getElementById("generateChartBtn");
-  if (generateChartBtn) {
-    generateChartBtn.addEventListener("click", generateChart);
-  }
-
-  // Save chart button
-  const saveChartBtn = document.getElementById("saveChartBtn");
-  if (saveChartBtn) {
-    saveChartBtn.addEventListener("click", saveChart);
-  }
-
-  // Create new chart button
-  const createNewChartBtn = document.getElementById("createNewChartBtn");
-  if (createNewChartBtn) {
-    createNewChartBtn.addEventListener("click", createNewChart);
-  }
-});
-
-// Generate chart
-async function generateChart() {
+// Generate chart - make it global so it can be called
+window.generateChart = async function () {
   const title = document.getElementById("chartTitle").value.trim();
   const xlabel = document.getElementById("chartXLabel").value.trim();
   const ylabel = document.getElementById("chartYLabel").value.trim();
   const color = document.getElementById("chartColor").value;
 
   // Collect data from rows
-  const dataRows = document.querySelectorAll(".data-row");
+  const dataRows = document.querySelectorAll("#dataInputs .data-row");
   const labels = [];
   const values = [];
 
@@ -98,6 +74,15 @@ async function generateChart() {
   loadingArea.style.display = "block";
 
   try {
+    console.log("Generating chart with data:", {
+      labels,
+      values,
+      title,
+      xlabel,
+      ylabel,
+      color,
+    });
+
     const response = await fetch(API_ENDPOINTS.barchart, {
       method: "POST",
       headers: {
@@ -113,7 +98,16 @@ async function generateChart() {
       }),
     });
 
+    console.log("Response status:", response.status);
+
+    if (!response.ok) {
+      throw new Error(
+        `Server error: ${response.status} ${response.statusText}`
+      );
+    }
+
     const data = await response.json();
+    console.log("Response data:", data);
 
     if (data.error) {
       throw new Error(data.error);
@@ -125,6 +119,11 @@ async function generateChart() {
 
     loadingArea.style.display = "none";
     resultArea.style.display = "block";
+
+    // Scroll to top smoothly after DOM updates
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 100);
   } catch (error) {
     console.error("Error generating chart:", error);
     alert("Error generating chart: " + error.message);
@@ -132,10 +131,10 @@ async function generateChart() {
     loadingArea.style.display = "none";
     inputArea.style.display = "block";
   }
-}
+};
 
 // Save chart as image
-function saveChart() {
+window.saveChart = function () {
   const chartImage = document.getElementById("chartImage");
   const title = document.getElementById("chartTitle").value.trim() || "chart";
 
@@ -146,10 +145,10 @@ function saveChart() {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-}
+};
 
 // Create new chart
-function createNewChart() {
+window.createNewChart = function () {
   const inputArea = document.querySelector(".barchart-input-section");
   const resultArea = document.getElementById("chartResultArea");
 
@@ -160,4 +159,4 @@ function createNewChart() {
   // document.getElementById("chartTitle").value = "Bar Chart";
   // document.getElementById("chartXLabel").value = "Categories";
   // document.getElementById("chartYLabel").value = "Values";
-}
+};

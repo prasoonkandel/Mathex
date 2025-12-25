@@ -54,6 +54,11 @@
         inputArea.style.display = "none";
         resultArea.style.display = "block";
 
+        // Scroll to top smoothly after DOM updates
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 100);
+
         if (window.MathJax) {
           MathJax.typesetPromise([resultDiv]).catch((err) =>
             console.log("MathJax error:", err)
