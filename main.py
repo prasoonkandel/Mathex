@@ -3,6 +3,9 @@ from Backend.engine import answer
 from Backend.qngen import makequiz
 from quotes import quotes as get_quote
 from Backend.formula import get_4mula
+from Backend.bar_chart import generate_chart as generate_bar_chart
+from Backend.pie_chart import generate_chart as generate_pie_chart
+
 from flask_cors import CORS
 import json
 
@@ -78,17 +81,6 @@ def formula_api():
 @app.route("/api/barchart", methods=["POST"])
 def barchart_api():
     try:
-        import importlib.util
-        import os
-        
-        # Load the bar-chart module
-        spec = importlib.util.spec_from_file_location(
-            "bar_chart",
-            os.path.join(os.path.dirname(__file__), "Backend", "bar-chart.py")
-        )
-        bar_chart = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(bar_chart)
-        
         data = request.get_json()
         labels = data.get("labels", [])
         values = data.get("values", [])
@@ -103,8 +95,31 @@ def barchart_api():
         if len(labels) != len(values):
             return jsonify({"error": "Labels and values must have the same length"}), 400
         
-        # Generate chart
-        img_base64 = bar_chart.generate_chart(labels, values, xlabel, ylabel, title, color)
+        img_base64 = generate_bar_chart(labels, values, xlabel, ylabel, title, color)
+        
+        return jsonify({
+            "image": f"data:image/png;base64,{img_base64}",
+            "success": True
+        })
+    
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route("/api/piechart", methods=["POST"])
+def piechart_api():
+    try:
+        data = request.get_json()
+        labels = data.get("labels", [])
+        values = data.get("values", [])
+        title = data.get("title", "Pie Chart")
+        
+        if not labels or not values:
+            return jsonify({"error": "Labels and values are required"}), 400
+        
+        if len(labels) != len(values):
+            return jsonify({"error": "Labels and values must have the same length"}), 400
+        
+        img_base64 = generate_pie_chart(labels, values, title)
         
         return jsonify({
             "image": f"data:image/png;base64,{img_base64}",
