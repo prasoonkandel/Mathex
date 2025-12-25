@@ -97,7 +97,7 @@ async function generatePieChart() {
   loadingArea.style.display = "block";
 
   try {
-    const response = await fetch("/api/piechart", {
+    const response = await fetch(API_ENDPOINTS.piechart, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

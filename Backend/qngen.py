@@ -151,8 +151,8 @@ def makequiz(user_message: str):
 
     except Exception as e:
 
-        eror_message = "Hack Club AI Error:" + str(e)
-        return eror_message
+        error_message = "API Error:" + str(e)
+        return error_message
 
 
 # Ahh finally done!

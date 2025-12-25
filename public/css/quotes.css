@@ -37,7 +37,47 @@ h1 {
   flex-direction: column;
   justify-content: center;
   position: relative;
+  transition: border-color 0.2s ease;
+}
+
+.refresh-quote-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--accent-color);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
   transition: all 0.3s ease;
+  color: white;
+  z-index: 2;
+}
+
+.refresh-quote-btn:hover {
+  background: var(--accent-hover);
+}
+
+.refresh-quote-btn:active {
+  animation: spin 0.1s linear;
+}
+
+.refresh-quote-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .quote-icon {

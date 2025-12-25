@@ -39,7 +39,7 @@
     resultDiv.textContent = "Processing your question...";
 
     try {
-      const response = await fetch("/api/solve", {
+      const response = await fetch(API_ENDPOINTS.solve, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question }),

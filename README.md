@@ -1,48 +1,64 @@
-# Mathex
+# Mathex - Modern Math Tools
 
----
+AI-powered mathematics platform with tools for solving problems, generating quizzes, and searching formulas.
 
-AI powered software to help you in your homeworks. Still in development phase
+## 🚀 Project Structure
 
-## Getting Started
+```
+Mathex/
+├── Backend/              # 🐍 Flask API (Deploy to Render/PythonAnywhere)
+│   ├── main.py          # Main Flask application
+│   ├── engine.py        # Math solver
+│   ├── qngen.py         # Quiz generator
+│   ├── formula.py       # Formula search
+│   ├── bar_chart.py     # Bar chart generator
+│   ├── pie_chart.py     # Pie chart generator
+│   ├── quotes.py        # Quote fetcher
+│   ├── quotes.json      # Quote database
+│   ├── .env             # Environment variables
+│   └── README.md        # Backend documentation
+│
+├── public/              # 🌐 Frontend (Deploy to Vercel)
+│   ├── index.html       # Main HTML file
+│   ├── 404.html         # Error page
+│   ├── css/             # Stylesheets
+│   ├── js/              # JavaScript files
+│   ├── assets/          # Images, favicon
+│   ├── vercel.json      # Vercel config
+│   ├── README.md        # Frontend documentation
+│   └── DEPLOYMENT.md    # Deployment guide
+│
+└── requirements.txt     # Python dependencies
+```
 
-### Requirements
+## 📦 Quick Start
 
-- Python 3.8 or higher
-- Git installed on your system
-- Basic knowledge of Python programming
+### Backend Setup
 
-### Installation & Setup
+```bash
+# Install dependencies
+pip install -r requirements.txt
 
-1. **Fork the Repository**
+# Navigate to Backend folder
+cd Backend
 
-   - Click the "Fork" button at the top right of this repository
-   - This creates a copy of the project in your GitHub account
+# Create .env file and add your API key
+echo "GEMINI_API_KEY=your_api_key_here" > .env
 
-2. **Clone Your Fork**
+# Run server
+python main.py
+```
 
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/Mathex
-   cd Mathex
-   ```
+Backend runs at: http://localhost:5000
 
-3. **Set Up Upstream Remote**
+### Frontend Setup
 
-   ```bash
-   git remote add upstream https://github.com/prasoonkandel/Mathex
-   ```
+```bash
+# Navigate to public folder
+cd public
 
-4. **Install Dependencies**
+# Serve with Python
+python -m http.server 8000
+```
 
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-5. **Run the Project**
-   ```bash
-   python main.py
-   ```
-
----
-
-**Ready to contribute? Fork the repo and start coding! 🚀**
+Frontend runs at: http://localhost:8000

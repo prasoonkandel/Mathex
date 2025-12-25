@@ -1,20 +1,26 @@
-from flask import Flask, request, jsonify, render_template
-from Backend.engine import answer
-from Backend.qngen import makequiz
+from flask import Flask, request, jsonify
+from engine import answer
+from qngen import makequiz
 from quotes import quotes as get_quote
-from Backend.formula import get_4mula
-from Backend.bar_chart import generate_chart as generate_bar_chart
-from Backend.pie_chart import generate_chart as generate_pie_chart
-
+from formula import get_4mula
+from bar_chart import generate_chart as generate_bar_chart
+from pie_chart import generate_chart as generate_pie_chart
 from flask_cors import CORS
-import json
+import os
 
 app = Flask(__name__)
-CORS(app)
 
-@app.route("/")
-def home():
-    return render_template("index.html")
+# CORS configuration - update with your Vercel domain after deployment
+CORS(app, resources={
+    r"/api/*": {
+        "origins": [
+            "http://localhost:8000",  # Local testing
+            "http://127.0.0.1:8000",  # Local testing
+            "https://*.vercel.app",   # All Vercel deployments
+            "*"  # Allow all (remove this in production)
+        ]
+    }
+})
 
 @app.route("/api/solve", methods=["POST"])
 def solve():
@@ -129,8 +135,13 @@ def piechart_api():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return jsonify({"error": "Endpoint not found"}), 404
+
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=False, host="0.0.0.0", port=port)
 
 
 

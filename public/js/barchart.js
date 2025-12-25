@@ -15,7 +15,6 @@ window.removeDataRow = function (button) {
   const dataInputs = document.getElementById("dataInputs");
   const rows = dataInputs.querySelectorAll(".data-row");
 
-
   if (rows.length > 1) {
     button.parentElement.remove();
   } else {
@@ -24,12 +23,10 @@ window.removeDataRow = function (button) {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
- 
   const addDataBtn = document.getElementById("addDataBtn");
   if (addDataBtn) {
     addDataBtn.addEventListener("click", addDataRow);
   }
-
 
   const generateChartBtn = document.getElementById("generateChartBtn");
   if (generateChartBtn) {
@@ -101,7 +98,7 @@ async function generateChart() {
   loadingArea.style.display = "block";
 
   try {
-    const response = await fetch("/api/barchart", {
+    const response = await fetch(API_ENDPOINTS.barchart, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -87,7 +87,7 @@
   height: 50px;
   font-size: 1.5rem;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;

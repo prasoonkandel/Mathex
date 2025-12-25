@@ -73,7 +73,7 @@
   font-weight: 600;
   cursor: pointer;
   margin-top: 1.75rem;
-  transition: all 0.3s;
+  transition: background 0.2s ease;
 }
 
 #formulaSubmitBtn:hover {

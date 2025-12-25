@@ -117,7 +117,7 @@
   padding: 0.75rem 1rem;
   cursor: pointer;
   font-size: 1.2rem;
-  transition: background 0.3s ease;
+  transition: background 0.2s ease;
   font-weight: bold;
 }
 
@@ -134,7 +134,7 @@
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: background 0.2s ease;
   width: 100%;
 }
 
@@ -154,7 +154,7 @@
   cursor: pointer;
   width: 100%;
   margin-top: 1.5rem;
-  transition: all 0.3s ease;
+  transition: box-shadow 0.2s ease;
   box-shadow: 0 4px 15px rgba(181, 38, 5, 0.3);
 }
 
@@ -201,13 +201,14 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: box-shadow 0.2s ease;
 }
 
 .save-chart-btn {
   background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
   color: white;
   box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+  transition: box-shadow 0.2s ease;
 }
 
 .save-chart-btn:hover {
@@ -219,6 +220,7 @@
   background: var(--secondary-bg, #6c757d);
   color: white;
   box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .create-new-chart-btn:hover {

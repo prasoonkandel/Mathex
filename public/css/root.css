@@ -4,6 +4,7 @@
   --bg-primary: #fafafa;
   --bg-secondary: #ffffff;
   --bg-tertiary: #f5f5f5;
+  --bg-about: #e7e7e7;
   --text-primary: #1a1a1a;
   --text-secondary: #737373;
   --text-tertiary: #a3a3a3;
@@ -27,6 +28,7 @@
   --bg-primary: #0a0a0a;
   --bg-secondary: #171717;
   --bg-tertiary: #262626;
+  --bg-about: #181818;
   --text-primary: #fafafa;
   --text-secondary: #d4d4d4;
   --text-tertiary: #a3a3a3;
@@ -34,7 +36,7 @@
   --border-hover: #525252;
   --accent-color: #ff4545;
   --accent-hover: #ff6b6b;
-  --accent-light: #4a1818;
+  --accent-light: #2d1f1f;
   --card-bg: #171717;
   --success-color: #34d399;
   --success-bg: #064e3b;
@@ -51,6 +53,16 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Lato, sans-serif;
+}
+
+::selection {
+  background: var(--accent-color);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: var(--accent-color);
+  color: #ffffff;
 }
 
 body {
@@ -147,19 +159,194 @@ nav {
 }
 
 .theme-toggle {
-  background: var(--accent-light);
-  border: 2px solid var(--accent-color);
-  border-radius: 8px;
-  padding: 8px 16px;
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-color);
+  border-radius: 50px;
+  padding: 10px 16px;
   cursor: pointer;
-  font-size: 1.2rem;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
 }
 
 .theme-toggle:hover {
   border-color: var(--accent-color);
   background: var(--accent-light);
+  transform: scale(1.05);
+}
+
+.theme-toggle .sun-icon,
+.theme-toggle .moon-icon {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+[data-theme="light"] .theme-toggle .sun-icon {
+  transform: rotate(0deg);
+  opacity: 1;
+}
+
+[data-theme="light"] .theme-toggle .moon-icon {
+  transform: rotate(90deg) scale(0);
+  opacity: 0;
+  position: absolute;
+}
+
+[data-theme="dark"] .theme-toggle .sun-icon {
+  transform: rotate(-90deg) scale(0);
+  opacity: 0;
+  position: absolute;
+}
+
+[data-theme="dark"] .theme-toggle .moon-icon {
+  transform: rotate(0deg);
+  opacity: 1;
+}
+
+/* Footer */
+.footer {
+  background: var(--bg-secondary);
+  border-top: 2px solid var(--border-color);
+  margin-top: 4rem;
+  padding: 4rem 0 1.5rem;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footer-section h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+}
+
+.footer-section.about p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  border: 2px solid var(--border-color);
+}
+
+.social-links a:hover {
+  background: var(--accent-color);
+  color: #fff;
+  border-color: var(--accent-color);
+}
+
+.footer-section.links ul {
+  list-style: none;
+}
+
+.footer-section.links li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-section.links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-section.links a:hover {
+  color: var(--accent-color);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.contact-item svg {
+  color: var(--accent-color);
+}
+
+.contact-item a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact-item a:hover {
+  color: var(--accent-color);
+}
+
+.dev-info {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.dev-info p {
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.dev-info strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.dev-description {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+}
+
+.portfolio-link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.portfolio-link:hover {
+  color: var(--accent-color);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.footer-bottom p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
 }
 
 footer {
@@ -189,8 +376,9 @@ footer {
     max-height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+    transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
     padding: 0;
+    background: var(--bg-secondary);
   }
 
   .nav-links.active {
@@ -201,15 +389,65 @@ footer {
 
   .nav-links li {
     margin: 0;
-    text-align: center;
     width: 100%;
   }
 
-  .nav-links a,
-  .theme-toggle {
+  .nav-links a {
     display: block;
-    padding: 12px 20px;
+    padding: 14px 20px;
     width: 100%;
+    text-align: left;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    background: var(--bg-tertiary);
+    border-left-color: var(--accent-color);
+    padding-left: 28px;
+  }
+
+  .theme-toggle {
+    margin: 0.5rem 20px;
+    width: calc(100% - 40px);
+    justify-content: center;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .footer {
+    padding: 3rem 0 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 2.5rem 0 1rem;
+    margin-top: 3rem;
+  }
+
+  .footer-container {
+    padding: 0 1rem;
+  }
+
+  .footer-content {
+    gap: 2rem;
+  }
+
+  .footer-section h3 {
+    font-size: 1.1rem;
+  }
+
+  .social-links a {
+    width: 36px;
+    height: 36px;
+  }
+
+  .footer-bottom p {
+    font-size: 0.85rem;
   }
 }
 

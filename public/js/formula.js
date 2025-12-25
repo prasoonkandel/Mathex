@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
       formulaSubmitBtn.textContent = "Searching...";
 
       try {
-        const response = await fetch("/api/formula", {
+        const response = await fetch(API_ENDPOINTS.formula, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ formula: query, grade_level: gradeLevel }),

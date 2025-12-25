@@ -105,7 +105,7 @@ button[type="submit"],
   font-weight: 600;
   cursor: pointer;
   margin-top: 1.75rem;
-  transition: all 0.3s;
+  transition: background 0.2s ease;
 }
 
 button[type="submit"]:hover,
@@ -188,7 +188,7 @@ button[type="submit"]:disabled {
   font-weight: 500;
   text-align: left;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease;
   color: var(--text-primary);
   line-height: 1.5;
   position: relative;

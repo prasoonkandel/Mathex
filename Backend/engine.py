@@ -121,4 +121,4 @@ def answer(user_message: str):
     
     except Exception as e:
         
-        return "Hack Club AI Error: " + str(e)
+        return "API Error: " + str(e)
