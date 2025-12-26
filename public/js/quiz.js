@@ -48,6 +48,11 @@
     loadingMessage.textContent = "Creating your quiz questions...";
     loadingMessage.classList.add("active");
 
+    // Scroll to top immediately using multiple methods
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
     try {
       const response = await fetch(API_ENDPOINTS.quiz, {
         method: "POST",

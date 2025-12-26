@@ -38,6 +38,11 @@
     resultDiv.className = "result loading";
     resultDiv.textContent = "Processing your question...";
 
+    // Scroll to top immediately using multiple methods
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
     try {
       const response = await fetch(API_ENDPOINTS.solve, {
         method: "POST",
@@ -53,11 +58,6 @@
 
         inputArea.style.display = "none";
         resultArea.style.display = "block";
-
-        // Scroll to top smoothly after DOM updates
-        setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }, 100);
 
         if (window.MathJax) {
           MathJax.typesetPromise([resultDiv]).catch((err) =>
@@ -83,5 +83,10 @@
     inputArea.style.display = "block";
 
     questionInput.value = "";
+
+    // Scroll to top immediately
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   });
 })();

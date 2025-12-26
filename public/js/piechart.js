@@ -70,6 +70,11 @@ window.generatePieChart = async function () {
   resultArea.style.display = "none";
   loadingArea.style.display = "block";
 
+  // Scroll to top immediately using multiple methods
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+
   try {
     console.log("Generating pie chart with data:", { labels, values, title });
 
@@ -106,11 +111,6 @@ window.generatePieChart = async function () {
 
     loadingArea.style.display = "none";
     resultArea.style.display = "block";
-
-    // Scroll to top smoothly after DOM updates
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 100);
   } catch (error) {
     console.error("Error generating pie chart:", error);
     alert("Error generating pie chart: " + error.message);
@@ -142,4 +142,9 @@ window.createNewPieChart = function () {
 
   resultArea.style.display = "none";
   inputArea.style.display = "block";
+
+  // Scroll to top immediately
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
 };
