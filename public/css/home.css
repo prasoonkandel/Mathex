@@ -254,7 +254,7 @@
 }
 
 .quotes-section h2 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 2rem;
@@ -274,7 +274,7 @@
 
 .useful-tools-section h2 {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 1rem;
@@ -403,6 +403,11 @@
   .useful-tools-section > * {
     padding: 0 1.5rem;
   }
+
+  .see-more-link {
+    font-size: 1rem;
+    padding: 0.65rem 1.75rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -416,6 +421,13 @@
 
   .hero p {
     font-size: 1rem;
+  }
+
+  .tools-section h2,
+  .quotes-section h2,
+  .useful-tools-section h2,
+  .community-section h2 {
+    font-size: 1.75rem;
   }
 
   .tools-section {
@@ -436,5 +448,97 @@
 
   .tool-card {
     padding: 1.5rem;
+  }
+
+  .see-more-link {
+    font-size: 0.95rem;
+    padding: 0.6rem 1.5rem;
+  }
+
+  .community-section {
+    padding: 2.5rem 1rem;
+  }
+
+  .community-section p {
+    font-size: 0.95rem;
+  }
+
+  .community-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    min-width: 160px;
+    white-space: normal;
+    line-height: 1.4;
+  }
+}
+
+/* Community Section */
+.community-section {
+  background: transparent;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.community-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.community-section h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.community-section p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.community-btn {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  background: var(--accent-color);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.community-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+  .tools-section h2,
+  .quotes-section h2,
+  .useful-tools-section h2,
+  .community-section h2 {
+    font-size: 2.25rem;
+  }
+
+  .community-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .community-section p {
+    font-size: 1.05rem;
+  }
+
+  .community-btn {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    min-width: 180px;
   }
 }

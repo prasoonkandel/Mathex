@@ -10,14 +10,14 @@ import os
 
 app = Flask(__name__)
 
-# CORS configuration - update with your Vercel domain after deployment
+
 CORS(app, resources={
     r"/api/*": {
         "origins": [
-            "http://localhost:8000",  # Local testing
-            "http://127.0.0.1:8000",  # Local testing
-            "https://*.vercel.app",   # All Vercel deployments
-            "*"  # Allow all (remove this in production)
+            "http://localhost:8000",  
+            "http://127.0.0.1:8000",  
+            "https://*.vercel.app",  
+            "*"  
         ]
     }
 })
