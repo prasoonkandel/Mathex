@@ -142,7 +142,7 @@ def api_call(messages):
         "model": MODEL,
         "messages": messages,
         "temperature": 0.8,
-        "max_tokens": 1000
+      
 
     
     }
