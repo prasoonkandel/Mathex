@@ -31,8 +31,11 @@ def after_request(response):
 def health_check():
     return jsonify({"status": "ok", "message": "Mathex API is running"}), 200
 
-@app.route("/api/solve", methods=["POST"])
+@app.route("/api/solve", methods=["POST", "OPTIONS"])
 def solve():
+    if request.method == "OPTIONS":
+        return jsonify({"status": "ok"}), 200
+        
     try:
         data = request.get_json()
         question = data.get("question", "")
@@ -42,9 +45,10 @@ def solve():
     
         result = answer(question)
         
-        return jsonify({"answer": result})
+        return jsonify({"answer": result}), 200
     
     except Exception as e:
+        traceback.print_exc()
         return jsonify({"error": str(e)}), 500
     
 @app.route("/api/quiz", methods=["POST", "OPTIONS"])
@@ -69,17 +73,24 @@ def quiz_api():
         return jsonify({"error": str(e)}), 500    
     
 
-@app.route("/api/quotes", methods=["GET"])
+@app.route("/api/quotes", methods=["GET", "OPTIONS"])
 def quotes_api():
+    if request.method == "OPTIONS":
+        return jsonify({"status": "ok"}), 200
+        
     try:
         quote_data = get_quote()
-        return jsonify(quote_data)
+        return jsonify(quote_data), 200
     except Exception as e:
+        traceback.print_exc()
         return jsonify({"error": str(e)}), 500
     
 
-@app.route("/api/formula", methods=["POST"])
+@app.route("/api/formula", methods=["POST", "OPTIONS"])
 def formula_api():
+    if request.method == "OPTIONS":
+        return jsonify({"status": "ok"}), 200
+        
     try:
         data = request.get_json()
         query = data.get("formula", "")
@@ -92,13 +103,17 @@ def formula_api():
         return jsonify({
             "formula": formula_result,
             "grade_level": grade
-        })
+        }), 200
     
     except Exception as e:
+        traceback.print_exc()
         return jsonify({"error": str(e)}), 500    
 
-@app.route("/api/barchart", methods=["POST"])
+@app.route("/api/barchart", methods=["POST", "OPTIONS"])
 def barchart_api():
+    if request.method == "OPTIONS":
+        return jsonify({"status": "ok"}), 200
+        
     try:
         data = request.get_json()
         labels = data.get("labels", [])
@@ -119,13 +134,17 @@ def barchart_api():
         return jsonify({
             "image": f"data:image/png;base64,{img_base64}",
             "success": True
-        })
+        }), 200
     
     except Exception as e:
+        traceback.print_exc()
         return jsonify({"error": str(e)}), 500
 
-@app.route("/api/piechart", methods=["POST"])
+@app.route("/api/piechart", methods=["POST", "OPTIONS"])
 def piechart_api():
+    if request.method == "OPTIONS":
+        return jsonify({"status": "ok"}), 200
+        
     try:
         data = request.get_json()
         labels = data.get("labels", [])
@@ -143,9 +162,10 @@ def piechart_api():
         return jsonify({
             "image": f"data:image/png;base64,{img_base64}",
             "success": True
-        })
+        }), 200
     
     except Exception as e:
+        traceback.print_exc()
         return jsonify({"error": str(e)}), 500
 
 @app.errorhandler(404)
