@@ -1,7 +1,9 @@
 import json
 import random
+from pathlib import Path
 
-JSON_FILE = "quotes.json"
+# Path to quotes.json in the Backend directory
+JSON_FILE = Path(__file__).parent / "quotes.json"
 
 def quotes():
 
