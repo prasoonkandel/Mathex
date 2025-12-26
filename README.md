@@ -31,28 +31,33 @@ Mathex/
 ## Setup
 
 1. Clone the repository
+
 ```bash
 git clone https://github.com/prasoonkandel/Mathex.git
 cd Mathex
 ```
 
 2. Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
 3. Configure environment
+
 ```bash
 cd Backend
 echo "GEMINI_API_KEY=your_api_key_here" > .env
 ```
 
 4. Run backend
+
 ```bash
 python main.py
 ```
 
 5. Run frontend (new terminal)
+
 ```bash
 cd public
 python -m http.server 8000
