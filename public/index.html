@@ -3,6 +3,88 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--SEO-->
+    <meta
+      name="description"
+      content="Mathex is a tool designed to help students in mathematics and make learning mathematics easier. It includes three core AI powered tools which help students solve math problems, generate quizzes, and find mathematical formulas quickly. It also consists other useful math tools to assist students in their studies."
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Mathex",
+        "description": "Tool built by students for students to make learning mathematics easier. Includes AI powered math solver, quiz generator, and formula library.",
+        "url": "https://mathex.prasoonkandel.me",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "creator": {
+          "@type": "Person",
+          "name": "Prasoon Kandel",
+          "url": "https://prasoonkandel.me"
+        },
+        "featureList": [
+          "AI Math Problem Solver",
+          "Quiz Generator",
+          "Formula Library",
+          "Bar Chart Generator",
+          "Pie Chart Generator",
+          "Distance Converter"
+        ]
+      }
+    </script>
+    <meta
+      name="keywords"
+      content="Mathex, math solver, AI math solver, online math calculator, step by step math solutions, math problem solver, algebra solver, calculus solver, quiz generator, math quiz, educational tools, formula library, mathematical formulas, pythagorean theorem, quadratic formula, distance converter, unit converter, bar chart generator, pie chart maker, data visualization, free math tools, student math helper, homework help, math learning tool, educational app, mathematics tools, online calculator, math education, STEM tools, student resources, free educational software, Prasoon Kandel, math app for students, tool for students"
+    />
+
+    <meta name="author" content="Prasoon Kandel" />
+    <meta name="publisher" content="Prasoon Kandel" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <meta
+      name="googlebot"
+      content="index, follow, max-snippet:-1, max-image-preview:large"
+    />
+    <meta
+      name="bingbot"
+      content="index, follow, max-snippet:-1, max-image-preview:large"
+    />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large"
+    />
+
+    <meta property="og:title" content="Mathex - Modern Math Tools" />
+    <meta
+      property="og:description"
+      content="Mathex is a tool built by students for students. Get step-by-step math solutions, generate custom quizzes, find formulas, and create charts. Free educational tool by Prasoon Kandel."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mathex.prasoonkandel.me" />
+    <meta
+      property="og:image"
+      content="https://mathex.prasoonkandel.me/assets/banner.jpg"
+    />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mathex - Modern Math Tools" />
+    <meta
+      name="twitter:description"
+      content="Tool built by students for students to make learning math easier. Solve problems, generate quizzes, find formulas, and create charts - by Prasoon Kandel."
+    />
+    <meta
+      name="twitter:image"
+      content="https://mathex.prasoonkandel.me/assets/banner.jpg"
+    />
     <title>Mathex - Modern Math Tools</title>
     <link
       rel="shortcut icon"
@@ -22,7 +104,6 @@
     <link rel="stylesheet" href="css/piechart.css" />
 
     <script>
-      // Initialize theme immediately to prevent flash
       (function () {
         let currentTheme = localStorage.getItem("theme");
         if (!currentTheme) {
@@ -1121,7 +1202,7 @@
                 High School Programmer & Tech Enthusiast
               </p>
               <a
-                href="https://prasoonkandel.me/"
+                href="https://mathex.prasoonkandel.me/"
                 target="_blank"
                 rel="noopener"
                 class="portfolio-link"
@@ -1139,7 +1220,6 @@
     </footer>
 
     <script>
-      // Theme toggle functionality
       document.addEventListener("DOMContentLoaded", () => {
         const themeToggle = document.getElementById("themeToggle");
 
@@ -1162,7 +1242,6 @@
           });
         }
 
-        // Hamburger menu
         const hamburger = document.getElementById("hamburger");
         const navLinks = document.getElementById("navLinks");
 
@@ -1172,7 +1251,6 @@
             navLinks.classList.toggle("active");
           });
 
-          // Close menu when clicking outside
           document.addEventListener("click", (e) => {
             if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
               hamburger.classList.remove("active");
@@ -1180,7 +1258,6 @@
             }
           });
 
-          // Close menu when clicking a link
           navLinks.querySelectorAll("a").forEach((link) => {
             link.addEventListener("click", () => {
               hamburger.classList.remove("active");

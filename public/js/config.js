@@ -1,6 +1,6 @@
 // API Configuration
 // Change this URL when deploying to production
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://prasoonkandel.pythonanywhere.com";
 
 // API Endpoints
 const API_ENDPOINTS = {
