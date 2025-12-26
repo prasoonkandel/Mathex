@@ -54,10 +54,17 @@
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
 
+    console.log("Starting quiz generation...");
+    console.log("Grade:", grade);
+    console.log("Topic:", topic);
+    console.log("API URL:", API_ENDPOINTS.quiz);
+
     try {
       // Add timeout controller
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 90000); // 90 second timeout
+
+      console.log("Sending request to:", API_ENDPOINTS.quiz);
 
       const response = await fetch(API_ENDPOINTS.quiz, {
         method: "POST",
@@ -71,11 +78,25 @@
 
       clearTimeout(timeoutId);
 
+      console.log("Response received. Status:", response.status);
+
       const data = await response.json();
+      console.log("Quiz API response:", data);
+      console.log("Response status:", response.status);
 
       if (response.ok) {
         try {
           let quizString = data.quiz;
+
+          // Check if response contains an error
+          if (quizString.includes('"error"')) {
+            const errorObj = JSON.parse(quizString);
+            if (errorObj.error) {
+              loadingMessage.textContent = errorObj.error;
+              loadingMessage.style.color = "#ef4444";
+              return;
+            }
+          }
 
           if (quizString.includes("```json")) {
             quizString = quizString.split("```json")[1].split("```")[0].trim();
@@ -84,6 +105,13 @@
           }
 
           quizData = JSON.parse(quizString);
+
+          // Check if parsed data contains error
+          if (quizData.error) {
+            loadingMessage.textContent = quizData.error;
+            loadingMessage.style.color = "#ef4444";
+            return;
+          }
 
           if (!quizData.questions || quizData.questions.length === 0) {
             throw new Error("No questions generated");

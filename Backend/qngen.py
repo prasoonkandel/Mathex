@@ -85,9 +85,8 @@ def api_call(messages):
         "temperature": 0.4,
         "max_tokens": 3600
     }
-
+    
     response = requests.post(API_URL, headers=headers, json=payload, timeout=60)
-
     response.raise_for_status()
     
     return response.json()["choices"][0]["message"]["content"].strip()
@@ -97,14 +96,21 @@ def makequiz(user_message: str):
    
     try:
         messages = initial_prompt(user_message)
-
-        return api_call(messages)
+        result = api_call(messages)
+        
+        if result.strip().startswith('{') and '"error"' in result:
+            return result
+   
+        return result
     
-
+    except requests.exceptions.Timeout:
+        return '{"error": "Request timed out. Please try again with a simpler topic."}'
+    
+    except requests.exceptions.RequestException as e:
+        return f'{{"error": "Network error: {str(e)}"}}'
+    
     except Exception as e:
-
-        error_message = "API Error:" + str(e)
-        return error_message
+        return f'{{"error": "API Error: {str(e)}"}}'
 
 
 # Ahh finally done!

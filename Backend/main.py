@@ -18,9 +18,15 @@ CORS(app, resources={
             "http://127.0.0.1:8000",  
             "https://*.vercel.app",  
             "*"  
-        ]
+        ],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type"]
     }
 })
+
+@app.route("/api/health", methods=["GET"])
+def health_check():
+    return jsonify({"status": "ok", "message": "Mathex API is running"}), 200
 
 @app.route("/api/solve", methods=["POST"])
 def solve():
