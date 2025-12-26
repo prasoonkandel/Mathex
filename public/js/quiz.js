@@ -45,7 +45,8 @@
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Generating...";
-    loadingMessage.textContent = "Creating your quiz questions...";
+    loadingMessage.textContent =
+      "Creating your quiz questions... This may take 20-30 seconds.";
     loadingMessage.classList.add("active");
 
     // Scroll to top immediately using multiple methods
@@ -54,6 +55,10 @@
     document.body.scrollTop = 0;
 
     try {
+      // Add timeout controller
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 90000); // 90 second timeout
+
       const response = await fetch(API_ENDPOINTS.quiz, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -61,7 +66,10 @@
           grade_level: grade,
           description: topic,
         }),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       const data = await response.json();
 
@@ -109,7 +117,12 @@
       }
     } catch (error) {
       console.error("Network error:", error);
-      loadingMessage.textContent = "Error: Could not connect to server";
+      if (error.name === "AbortError") {
+        loadingMessage.textContent =
+          "Error: Quiz generation timed out. Please try a simpler topic or try again.";
+      } else {
+        loadingMessage.textContent = "Error: Could not connect to server";
+      }
       loadingMessage.style.color = "#ef4444";
     } finally {
       submitBtn.disabled = false;
