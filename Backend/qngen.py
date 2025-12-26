@@ -2,9 +2,11 @@ import requests
 import os
 from datetime import datetime
 from dotenv import load_dotenv
+from pathlib import Path
 
-
-load_dotenv()
+# Load .env from root directory
+env_path = Path(__file__).parent.parent / '.env'
+load_dotenv(dotenv_path=env_path)
 
 
 AI_KEY = os.getenv("AI_KEY")
