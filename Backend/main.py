@@ -139,6 +139,10 @@ def piechart_api():
 def page_not_found(e):
     return jsonify({"error": "Endpoint not found"}), 404
 
+
+application = app
+
+
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8000))
     app.run(debug=False, host="0.0.0.0", port=port)
