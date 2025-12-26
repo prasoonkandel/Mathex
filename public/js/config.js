@@ -1,6 +1,6 @@
 // API Configuration
 // Change this URL when deploying to production
-const API_BASE_URL = "https://mathex.onrender.com/";
+const API_BASE_URL = "https://mathex.onrender.com";
 
 // API Endpoints
 const API_ENDPOINTS = {

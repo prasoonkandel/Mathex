@@ -123,11 +123,11 @@ button[type="submit"]:disabled {
 .loading-message {
   margin-top: 1.75rem;
   padding: 1.5rem;
-  background: var(--info-bg);
+  background: var(--bg-tertiary);
   border-left: 4px solid var(--accent-color);
   border-radius: 8px;
   text-align: center;
-  color: var(--info-color);
+  color: var(--text-primary);
   display: none;
   font-weight: 500;
 }

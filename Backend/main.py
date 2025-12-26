@@ -7,22 +7,25 @@ from .bar_chart import generate_chart as generate_bar_chart
 from .pie_chart import generate_chart as generate_pie_chart
 from flask_cors import CORS
 import os
+import traceback
 
 app = Flask(__name__)
 
-
 CORS(app, resources={
-    r"/api/*": {
-        "origins": [
-            "http://localhost:8000",  
-            "http://127.0.0.1:8000",  
-            "https://*.vercel.app",  
-            "*"  
-        ],
+    r"/*": {
+        "origins": "*",
         "methods": ["GET", "POST", "OPTIONS"],
-        "allow_headers": ["Content-Type"]
+        "allow_headers": ["Content-Type", "Authorization"],
+        "supports_credentials": False
     }
 })
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,POST,OPTIONS')
+    return response
 
 @app.route("/api/health", methods=["GET"])
 def health_check():
@@ -44,8 +47,11 @@ def solve():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
-@app.route("/api/quiz", methods=["POST"])
+@app.route("/api/quiz", methods=["POST", "OPTIONS"])
 def quiz_api():
+    if request.method == "OPTIONS":
+        return jsonify({"status": "ok"}), 200
+        
     try:
         data = request.get_json()
         description = data.get("description", "")
@@ -56,9 +62,10 @@ def quiz_api():
           
         result = makequiz(f"Generate a quiz for grade {grade_level} on the topic: {description}")
         
-        return jsonify({"quiz": result})
+        return jsonify({"quiz": result}), 200
     
     except Exception as e:
+        traceback.print_exc()
         return jsonify({"error": str(e)}), 500    
     
 
