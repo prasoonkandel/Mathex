@@ -43,11 +43,16 @@
 
     if (!grade || !topic) return;
 
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Generating...";
-    loadingMessage.textContent =
-      "Creating your quiz questions... This may take 20-30 seconds.";
-    loadingMessage.classList.add("active");
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Generating...";
+    }
+
+    if (loadingMessage) {
+      loadingMessage.textContent =
+        "Creating your quiz questions... This may take 20-30 seconds.";
+      loadingMessage.classList.add("active");
+    }
 
     // Scroll to top immediately using multiple methods
     window.scrollTo(0, 0);
@@ -92,8 +97,10 @@
           if (quizString.includes('"error"')) {
             const errorObj = JSON.parse(quizString);
             if (errorObj.error) {
-              loadingMessage.textContent = errorObj.error;
-              loadingMessage.style.color = "#ef4444";
+              if (loadingMessage) {
+                loadingMessage.textContent = errorObj.error;
+                loadingMessage.style.color = "#ef4444";
+              }
               return;
             }
           }
@@ -108,8 +115,10 @@
 
           // Check if parsed data contains error
           if (quizData.error) {
-            loadingMessage.textContent = quizData.error;
-            loadingMessage.style.color = "#ef4444";
+            if (loadingMessage) {
+              loadingMessage.textContent = quizData.error;
+              loadingMessage.style.color = "#ef4444";
+            }
             return;
           }
 
@@ -133,28 +142,37 @@
         } catch (parseError) {
           console.error("Parse error:", parseError);
           console.error("Raw quiz data:", data.quiz);
-          loadingMessage.textContent =
-            "Error: " + (parseError.message || "Invalid quiz format received");
-          loadingMessage.style.color = "#ef4444";
+          if (loadingMessage) {
+            loadingMessage.textContent =
+              "Error: " +
+              (parseError.message || "Invalid quiz format received");
+            loadingMessage.style.color = "#ef4444";
+          }
         }
       } else {
         console.error("Server error:", data);
-        loadingMessage.textContent =
-          "Error: " + (data.error || "Something went wrong");
-        loadingMessage.style.color = "#ef4444";
+        if (loadingMessage) {
+          loadingMessage.textContent =
+            "Error: " + (data.error || "Something went wrong");
+          loadingMessage.style.color = "#ef4444";
+        }
       }
     } catch (error) {
       console.error("Network error:", error);
-      if (error.name === "AbortError") {
-        loadingMessage.textContent =
-          "Error: Quiz generation timed out. Please try a simpler topic or try again.";
-      } else {
-        loadingMessage.textContent = "Error: Could not connect to server";
+      if (loadingMessage) {
+        if (error.name === "AbortError") {
+          loadingMessage.textContent =
+            "Error: Quiz generation timed out. Please try a simpler topic or try again.";
+        } else {
+          loadingMessage.textContent = "Error: Could not connect to server";
+        }
+        loadingMessage.style.color = "#ef4444";
       }
-      loadingMessage.style.color = "#ef4444";
     } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Generate Quiz";
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Generate Quiz";
+      }
     }
   }
 
