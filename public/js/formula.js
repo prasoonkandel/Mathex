@@ -1,3 +1,7 @@
+// Let Backend do the formula searching :D
+
+// JS bro chill :P your bro python will handle the hard work :D
+
 document.addEventListener("DOMContentLoaded", function () {
   const formulaForm = document.getElementById("formulaForm");
   const formulaQuery = document.getElementById("formulaQuery");

@@ -120,13 +120,13 @@ window.generatePieChart = async function () {
   }
 };
 
-// Save chart as image
+// Lets save it
 function savePieChart() {
   const chartImage = document.getElementById("pieChartImage");
   const title =
     document.getElementById("pieChartTitle").value.trim() || "pie_chart";
 
-  // Create a temporary link to download
+  //Link to download hehe
   const link = document.createElement("a");
   link.href = chartImage.src;
   link.download = `${title.replace(/\s+/g, "_")}.png`;
@@ -135,7 +135,7 @@ function savePieChart() {
   document.body.removeChild(link);
 }
 
-// Create new pie chart
+// Make New pieeeee
 window.createNewPieChart = function () {
   const inputArea = document.querySelector(".piechart-input-section");
   const resultArea = document.getElementById("pieChartResultArea");
@@ -143,7 +143,7 @@ window.createNewPieChart = function () {
   resultArea.style.display = "none";
   inputArea.style.display = "block";
 
-  // Scroll to top immediately
+  // Just go to top broo I mean just go... nothing to listen
   window.scrollTo(0, 0);
   document.documentElement.scrollTop = 0;
   document.body.scrollTop = 0;

@@ -1,4 +1,5 @@
-// Page Navigation
+// My talent is to make SPA from scratch :P using vanilla html css js
+// I hate react angular vue and all that frameworks/libraries :P
 function showPage(pageName) {
   document.querySelectorAll(".page-section").forEach((section) => {
     section.classList.remove("active");

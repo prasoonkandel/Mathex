@@ -142,7 +142,7 @@ window.saveChart = function () {
   document.body.removeChild(link);
 };
 
-// Create new chart
+// Makee a chartttt
 window.createNewChart = function () {
   const inputArea = document.querySelector(".barchart-input-section");
   const resultArea = document.getElementById("chartResultArea");
@@ -150,13 +150,7 @@ window.createNewChart = function () {
   resultArea.style.display = "none";
   inputArea.style.display = "block";
 
-  // Scroll to top immediately
   window.scrollTo(0, 0);
   document.documentElement.scrollTop = 0;
   document.body.scrollTop = 0;
-
-  // Optionally reset form
-  // document.getElementById("chartTitle").value = "Bar Chart";
-  // document.getElementById("chartXLabel").value = "Categories";
-  // document.getElementById("chartYLabel").value = "Values";
 };

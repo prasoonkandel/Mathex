@@ -1,6 +1,7 @@
 // API Configuration
-// Change this URL when deploying to production
+
 const API_BASE_URL = "https://mathex.onrender.com";
+// Render > PythonAnywhere > Localhost
 
 // API Endpoints
 const API_ENDPOINTS = {

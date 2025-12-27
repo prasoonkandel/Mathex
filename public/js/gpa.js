@@ -1,4 +1,6 @@
 // GPA Calculator Page JS
+
+/*Anyone looking this code will get 4 GPA in next exam*/
 const gradeToGPA = {
   "A+": 4.0,
   A: 3.6,

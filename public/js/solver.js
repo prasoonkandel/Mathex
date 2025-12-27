@@ -38,7 +38,6 @@
     resultDiv.className = "result loading";
     resultDiv.textContent = "Processing your question...";
 
-    // Scroll to top immediately using multiple methods
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
@@ -84,7 +83,6 @@
 
     questionInput.value = "";
 
-    // Scroll to top immediately
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;

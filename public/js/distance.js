@@ -1,4 +1,7 @@
 // Distance conversion function using the C++ logic i made
+
+// I wish I could make live conversion using cpp
+
 function distance(value, unit_from, unit_to) {
   if (unit_from === "mile") {
     if (unit_to === "foot") {

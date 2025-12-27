@@ -451,7 +451,6 @@ footer {
   }
 }
 
-/* SPA Page Section Styles */
 .page-section {
   display: none;
   opacity: 0;
@@ -475,7 +474,6 @@ footer {
   }
 }
 
-/* Back to Home Link */
 .back-to-home {
   display: inline-block;
   color: var(--accent-color);

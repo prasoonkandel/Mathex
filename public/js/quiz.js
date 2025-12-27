@@ -1,3 +1,6 @@
+// NGL this file is full of error handling :D :D
+// It has tooo much un necessary code, too lazy to clean it :P :P
+
 (function () {
   let quizData = null;
   let currentQuestionIndex = 0;
@@ -54,7 +57,7 @@
       loadingMessage.classList.add("active");
     }
 
-    // Scroll to top immediately using multiple methods
+    // Scroll to top immediately using multiple methods (ReSON: It looks cool)
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
@@ -65,9 +68,8 @@
     console.log("API URL:", API_ENDPOINTS.quiz);
 
     try {
-      // Add timeout controller
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 90000); // 90 second timeout
+      const timeoutId = setTimeout(() => controller.abort(), 90000); // 90 second timeout (If sever took long time i dont want you guys t wait forever)
 
       console.log("Sending request to:", API_ENDPOINTS.quiz);
 
@@ -93,7 +95,7 @@
         try {
           let quizString = data.quiz;
 
-          // Check if response contains an error
+          // Error every where :( :( handling it anywhere
           if (quizString.includes('"error"')) {
             const errorObj = JSON.parse(quizString);
             if (errorObj.error) {
@@ -113,7 +115,7 @@
 
           quizData = JSON.parse(quizString);
 
-          // Check if parsed data contains error
+          // Error if here - A Legend
           if (quizData.error) {
             if (loadingMessage) {
               loadingMessage.textContent = quizData.error;

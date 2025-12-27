@@ -35,6 +35,8 @@ function tempConv(unitFrom, unitTo, value) {
   }
 }
 
+// Same style of logic as distance.js :) he he
+
 function getTempUnitName(unit) {
   const names = {
     c: "Celsius",
