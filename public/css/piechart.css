@@ -1,4 +1,4 @@
-/* Pie Chart Page Styles - Reusing Bar Chart Styles */
+/* Pie Chart Page Styles, I am Reusing Bar Chart Styles :0 hehe */
 
 #page-piechart .container {
   max-width: 900px;
@@ -26,7 +26,7 @@
   margin-bottom: 2rem;
 }
 
-/* Reuse the same styles for pie chart data input */
+/* Reuse the same styles for pie chart data input :) too lzy for  new style */
 #pieDataInputs .data-row {
   display: grid;
   grid-template-columns: 1fr 1fr auto;
@@ -50,7 +50,6 @@
   border-color: var(--accent-color);
 }
 
-/* Chart Result Area */
 #pieChartResultArea {
   background: var(--card-bg);
   border-radius: 12px;
@@ -72,7 +71,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   #page-piechart .container {
     padding: 1.5rem;
