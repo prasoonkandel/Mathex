@@ -1,4 +1,4 @@
-// Bar Chart Page JavaScript
+// Bar Chart Page JS
 window.addDataRow = function () {
   const dataInputs = document.getElementById("dataInputs");
   const newRow = document.createElement("div");
@@ -22,14 +22,12 @@ window.removeDataRow = function (button) {
   }
 };
 
-// Generate chart - make it global so it can be called
 window.generateChart = async function () {
   const title = document.getElementById("chartTitle").value.trim();
   const xlabel = document.getElementById("chartXLabel").value.trim();
   const ylabel = document.getElementById("chartYLabel").value.trim();
   const color = document.getElementById("chartColor").value;
 
-  // Collect data from rows
   const dataRows = document.querySelectorAll("#dataInputs .data-row");
   const labels = [];
   const values = [];
@@ -48,7 +46,6 @@ window.generateChart = async function () {
     values.push(parseFloat(value));
   });
 
-  // Validation
   if (!isValid) {
     alert("Please fill in all labels and values!");
     return;
@@ -64,7 +61,6 @@ window.generateChart = async function () {
     return;
   }
 
-  // Show loading
   const inputArea = document.querySelector(".barchart-input-section");
   const resultArea = document.getElementById("chartResultArea");
   const loadingArea = document.getElementById("chartLoading");
@@ -73,7 +69,6 @@ window.generateChart = async function () {
   resultArea.style.display = "none";
   loadingArea.style.display = "block";
 
-  // Scroll to top immediately using multiple methods
   window.scrollTo(0, 0);
   document.documentElement.scrollTop = 0;
   document.body.scrollTop = 0;

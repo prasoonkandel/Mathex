@@ -103,6 +103,7 @@
     <link rel="stylesheet" href="css/quotes.css" />
     <link rel="stylesheet" href="css/formula.css" />
     <link rel="stylesheet" href="css/distance.css" />
+    <link rel="stylesheet" href="css/temperature.css" />
     <link rel="stylesheet" href="css/barchart.css" />
     <link rel="stylesheet" href="css/piechart.css" />
 
@@ -958,6 +959,17 @@
             </div>
 
             <div class="tool-card">
+              <h3>Temperature Converter</h3>
+              <p>
+                Convert between temperature units: Celsius, Fahrenheit, and
+                Kelvin. Perfect for science and everyday use.
+              </p>
+              <a href="#" data-page="temperature" class="tool-link"
+                >Try Now →</a
+              >
+            </div>
+
+            <div class="tool-card">
               <h3>Equation Solver</h3>
               <p>
                 Solve linear, quadratic, and system of equations with
@@ -974,6 +986,56 @@
               </p>
               <button class="tool-link" disabled>Coming Soon</button>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="page-temperature" class="page-section">
+      <div class="content">
+        <div class="container">
+          <a href="#" data-page="home" class="back-to-home">← Back to Home</a>
+          <h1>Temperature Converter</h1>
+          <p class="subtitle">Convert between temperature units instantly</p>
+
+          <div class="converter-container">
+            <div class="converter-box">
+              <label for="tempFromValue">From</label>
+              <input
+                type="number"
+                id="tempFromValue"
+                placeholder="Enter value"
+                step="any"
+              />
+              <select id="tempFromUnit">
+                <option value="c">Celsius (°C)</option>
+                <option value="f">Fahrenheit (°F)</option>
+                <option value="k">Kelvin (K)</option>
+              </select>
+            </div>
+
+            <div class="converter-swap">
+              <button id="tempSwapBtn" class="swap-btn">⇄</button>
+            </div>
+
+            <div class="converter-box">
+              <label for="tempToValue">To</label>
+              <input
+                type="number"
+                id="tempToValue"
+                placeholder="Result"
+                readonly
+              />
+              <select id="tempToUnit">
+                <option value="f">Fahrenheit (°F)</option>
+                <option value="c">Celsius (°C)</option>
+                <option value="k">Kelvin (K)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="conversion-info">
+            <p id="tempConversionFormula"></p>
           </div>
         </div>
       </div>
@@ -1265,6 +1327,7 @@
     <script src="js/formula.js"></script>
     <script src="js/quiz.js"></script>
     <script src="js/distance.js"></script>
+    <script src="js/temperature.js"></script>
     <script src="js/barchart.js"></script>
     <script src="js/piechart.js"></script>
   </body>
