@@ -1,0 +1,289 @@
+/* GPA Calculator Page Styles */
+
+#page-gpa .container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+#page-gpa h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+#page-gpa .subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.gpa-input-section {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.input-group input[type="text"],
+.input-group input[type="number"],
+.input-group select {
+  width: 100%;
+  padding: 0.875rem;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.input-group input[type="text"]:focus,
+.input-group input[type="number"]:focus,
+.input-group select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.subject-input-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--border-color);
+}
+
+.subject-input-section h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.info-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+#subjectInputs {
+  margin-bottom: 1rem;
+}
+
+.subject-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  align-items: center;
+}
+
+.subject-row input,
+.subject-row select {
+  padding: 0.875rem;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.subject-row input:focus,
+.subject-row select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.remove-subject-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background 0.2s ease;
+  font-weight: bold;
+}
+
+.remove-subject-btn:hover {
+  background: #c82333;
+}
+
+.add-subject-btn {
+  background: var(--accent-color, #28a745);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.2s ease;
+  width: 100%;
+}
+
+.add-subject-btn:hover {
+  background: #218838;
+  transform: translateY(-2px);
+}
+
+.calculate-gpa-btn {
+  background: linear-gradient(135deg, #b52605 0%, #8b1e04 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 15px rgba(181, 38, 5, 0.3);
+}
+
+.calculate-gpa-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(181, 38, 5, 0.4);
+}
+
+.calculate-gpa-btn:active {
+  transform: translateY(0);
+}
+
+#gpaResultArea {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.gpa-result-display {
+  margin-bottom: 2rem;
+}
+
+.gpa-result-display h2 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.gpa-value {
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gpa-scale {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.gpa-details {
+  background: var(--bg-primary);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.gpa-details h3 {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.gpa-detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 1rem;
+}
+
+.gpa-detail-row:last-child {
+  border-bottom: none;
+}
+
+.gpa-detail-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.gpa-detail-value {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.gpa-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.create-new-gpa-btn {
+  flex: 1;
+  background: linear-gradient(135deg, #b52605 0%, #8b1e04 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(181, 38, 5, 0.3);
+}
+
+.create-new-gpa-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(181, 38, 5, 0.4);
+}
+
+/* Tu Tu Nadie Como */
+@media (max-width: 768px) {
+  #page-gpa .container {
+    padding: 1rem;
+  }
+
+  #page-gpa h1 {
+    font-size: 2rem;
+  }
+
+  .subject-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .remove-subject-btn {
+    width: 100%;
+  }
+
+  .gpa-value {
+    font-size: 3rem;
+  }
+
+  .gpa-actions {
+    flex-direction: column;
+  }
+
+  .gpa-input-section,
+  #gpaResultArea {
+    padding: 1.5rem;
+  }
+}
