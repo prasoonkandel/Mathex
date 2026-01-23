@@ -1,10 +1,10 @@
 from flask import Flask, request, jsonify
-from .engine import answer
-from .qngen import makequiz
-from .quotes import quotes as get_quote
-from .formula import get_4mula
-from .bar_chart import generate_chart as generate_bar_chart
-from .pie_chart import generate_chart as generate_pie_chart
+from engine import answer
+from qngen import makequiz
+from quotes import quotes as get_quote
+from formula import get_4mula
+from bar_chart import generate_chart as generate_bar_chart
+from pie_chart import generate_chart as generate_pie_chart
 from flask_cors import CORS
 import os
 import traceback
