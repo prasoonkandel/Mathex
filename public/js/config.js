@@ -1,6 +1,6 @@
 // API Configuration
 
-const API_BASE_URL = "https://mathex.onrender.com";
+const API_BASE_URL = "https://mathex-r44n.onrender.com/";
 // Render > PythonAnywhere > Localhost
 
 // API Endpoints
