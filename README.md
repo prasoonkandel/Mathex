@@ -60,7 +60,8 @@ python main.py
 
 ```bash
 cd public
-python -m http.server 8000
+python -m http.server 3000
 ```
 
-6. Open browser at http://localhost:8000
+6. Open browser at http://localhost:3000
+
