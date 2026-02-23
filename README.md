@@ -1,6 +1,11 @@
 # Mathex
 
 AI-powered mathematics platform for students.
+<p >
+  <a href="https://mathex.prasoonkandel.com" target="_blank">
+    <img src="https://img.shields.io/badge/Online Website-00686e?style=for-the-badge&logo=google-chrome&logoColor=white"/>
+  </a>
+</p>
 
 ## Project Structure
 
@@ -64,4 +69,5 @@ python -m http.server 3000
 ```
 
 6. Open browser at http://localhost:3000
+
 
