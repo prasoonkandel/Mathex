@@ -12,7 +12,7 @@ AI_KEY = os.getenv("AI_KEY")
 
 API_URL = "https://ai.hackclub.com/proxy/v1/chat/completions"
 
-MODEL = "gpt-5.1"
+MODEL = "openai/gpt-5.5"
 
 if not AI_KEY:
     raise RuntimeError("AI_KEY not found in .env file")
