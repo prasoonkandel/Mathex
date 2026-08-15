@@ -13,7 +13,7 @@ AI_KEY = os.getenv("AI_KEY")
 
 API_URL = "https://ai.hackclub.com/proxy/v1/chat/completions"
 
-MODEL = "~moonshotai/kimi-latest"
+MODEL = "~anthropic/claude-opus-latest"
 
 if not AI_KEY:
     raise RuntimeError("AI_KEY not found in .env file")
@@ -100,7 +100,12 @@ def inital_prompt(user_message: str):
 
 def api_call(messages):
     headers = {"Authorization": f"Bearer {AI_KEY}", "Content-Type": "application/json"}
-    payload = {"model": MODEL, "messages": messages, "temperature": 0.2}
+    payload = {
+        "model": MODEL,
+        "messages": messages,
+        "temperature": 0.2,
+        "max_tokens": 3000,
+    }
 
     response = requests.post(API_URL, headers=headers, json=payload)
     response.raise_for_status()
