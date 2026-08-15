@@ -1,10 +1,11 @@
-import requests
 import os
-from dotenv import load_dotenv
 from pathlib import Path
 
+import requests
+from dotenv import load_dotenv
+
 # Load .env from root directory
-env_path = Path(__file__).parent.parent / '.env'
+env_path = Path(__file__).parent.parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
 
@@ -12,17 +13,15 @@ AI_KEY = os.getenv("AI_KEY")
 
 API_URL = "https://ai.hackclub.com/proxy/v1/chat/completions"
 
-MODEL = "openai/gpt-5.5"
+MODEL = "~moonshotai/kimi-latest"
 
 if not AI_KEY:
     raise RuntimeError("AI_KEY not found in .env file")
 
 
-
 commands = {
-# Easter Eggs   
-    "who is prasoon": 
-    """
+    # Easter Eggs
+    "who is prasoon": """
         <div style='padding:15px;'>
             <h3 style='color:#4a90e2;'>👨‍💻 Prasoon Kandel</h3>
             <p><strong>Creator of Mathex</strong></p>
@@ -31,10 +30,9 @@ commands = {
             </p>
             <p style='color:#666;'>"Making math beautiful, one equation at a time"</p>
         </div>
-        
+
         """,
-    "Radha Krishna": 
-    """
+    "Radha Krishna": """
         <div style='padding:15px;'>
             <h3 style='color:#4a90e2;'>Radha Krishna</h3>
             <p><strong>Universal Expression</strong></p>
@@ -43,15 +41,15 @@ commands = {
             </p>
             <p style='color:#666;'>"Making math beautiful, one equation at a time"</p>
         </div>
-        """
+        """,
 }
+
+
 def inital_prompt(user_message: str):
     return [
         {
             "role": "system",
             "content": (
-
-            
                 "You are Mathex, a math helper built by Prasoon Kandel to solve ONLY computational math problems step by step.\n\n"
                 "STRICT RULES - REFUSE these types of questions:\n"
                 "❌ Historical questions (Who invented/discovered/father of math/mathematician)\n"
@@ -94,44 +92,30 @@ def inital_prompt(user_message: str):
                 "<span style='font-size:1.5em;'>$x=-2, x=-3$</span>\n"
                 "</div>\n\n"
                 "If the question is incomplete or has typos but you understand the math problem, fix it and solve. Otherwise, reject non-computational questions."
-            
-            )
-
+            ),
         },
-        {"role": "user", "content": user_message}
+        {"role": "user", "content": user_message},
     ]
-    
+
 
 def api_call(messages):
-    headers = {
-        "Authorization": f"Bearer {AI_KEY}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-
-        "model": MODEL,
-        "messages": messages,
-        "temperature": 0.2
-
-    }
+    headers = {"Authorization": f"Bearer {AI_KEY}", "Content-Type": "application/json"}
+    payload = {"model": MODEL, "messages": messages, "temperature": 0.2}
 
     response = requests.post(API_URL, headers=headers, json=payload)
     response.raise_for_status()
     return response.json()["choices"][0]["message"]["content"].strip()
 
+
 def answer(user_message: str):
     for key in commands:
-
         if key in user_message.lower():
-
             return commands[key]
 
     try:
-
         messages = inital_prompt(user_message)
 
         return api_call(messages)
-    
+
     except Exception as e:
-        
         return "API Error: " + str(e)

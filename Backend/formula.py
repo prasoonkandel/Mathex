@@ -1,22 +1,24 @@
-import requests
 import os
-from dotenv import load_dotenv
 from pathlib import Path
 
+import requests
+from dotenv import load_dotenv
+
 # Load .env from root directory
-env_path = Path(__file__).parent.parent / '.env'
+env_path = Path(__file__).parent.parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
 AI_KEY = os.getenv("AI_KEY")
 
 API_URL = "https://ai.hackclub.com/proxy/v1/chat/completions"
 
-MODEL = "gpt-5.1"
+MODEL = "google/gemini-3.7-flash"
 
 if not AI_KEY:
     raise RuntimeError("AI_KEY not found in .env file")
 
-def formula_prompt(user_message: str, grade:str):
+
+def formula_prompt(user_message: str, grade: str):
     return [
         {
             "role": "system",
@@ -60,27 +62,15 @@ def formula_prompt(user_message: str, grade:str):
                 "where $a$, $b$, $c$ are coefficients and $a \\neq 0$</p>\n"
                 "</div>\n\n"
                 "REJECT all non-formula requests immediately. Do not engage with historical, philosophical, or inappropriate questions."
-            )
+            ),
         },
-        {
-            "role": "user",
-            "content": user_message
-        }
-    ]   
+        {"role": "user", "content": user_message},
+    ]
 
 
 def api_call(messages):
-    headers = {
-        "Authorization": f"Bearer {AI_KEY}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-
-        "model": MODEL,
-        "messages": messages,
-        "temperature": 0.3
-
-    }
+    headers = {"Authorization": f"Bearer {AI_KEY}", "Content-Type": "application/json"}
+    payload = {"model": MODEL, "messages": messages, "temperature": 0.3}
 
     response = requests.post(API_URL, headers=headers, json=payload)
     response.raise_for_status()

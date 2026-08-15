@@ -1,11 +1,12 @@
-import requests
 import os
 from datetime import datetime
-from dotenv import load_dotenv
 from pathlib import Path
 
+import requests
+from dotenv import load_dotenv
+
 # Load .env from root directory
-env_path = Path(__file__).parent.parent / '.env'
+env_path = Path(__file__).parent.parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
 
@@ -14,8 +15,7 @@ AI_KEY = os.getenv("AI_KEY")
 API_URL = "https://ai.hackclub.com/proxy/v1/chat/completions"
 
 
-MODEL = "gpt-5.1"
-
+MODEL = "~anthropic/claude-opus-latest"
 
 
 if not AI_KEY:
@@ -62,53 +62,45 @@ RULES:
 - Randomize correct answer position (don't make patterns)
 - Make distractors realistic and plausible
 - Keep solutions clear and concise
-"""
+""",
         },
-        {
-            "role": "user",
-            "content": user_message
-        }
+        {"role": "user", "content": user_message},
     ]
 
 
-
-
 def api_call(messages):
-    headers = {
-        "Authorization": f"Bearer {AI_KEY}",
-        "Content-Type": "application/json"
-    }
+    headers = {"Authorization": f"Bearer {AI_KEY}", "Content-Type": "application/json"}
 
     payload = {
         "model": MODEL,
         "messages": messages,
         "temperature": 0.4,
-        "max_tokens": 3600
+        "max_tokens": 3600,
     }
-    
+
     response = requests.post(API_URL, headers=headers, json=payload, timeout=60)
     response.raise_for_status()
-    
+
     return response.json()["choices"][0]["message"]["content"].strip()
 
 
 def makequiz(user_message: str):
-   
+
     try:
         messages = initial_prompt(user_message)
         result = api_call(messages)
-        
-        if result.strip().startswith('{') and '"error"' in result:
+
+        if result.strip().startswith("{") and '"error"' in result:
             return result
-   
+
         return result
-    
+
     except requests.exceptions.Timeout:
         return '{"error": "Request timed out. Please try again with a simpler topic."}'
-    
+
     except requests.exceptions.RequestException as e:
         return f'{{"error": "Network error: {str(e)}"}}'
-    
+
     except Exception as e:
         return f'{{"error": "API Error: {str(e)}"}}'
 
