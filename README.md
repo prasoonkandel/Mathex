@@ -52,11 +52,13 @@ pip install -r requirements.txt
 ```bash
 cd Backend
 echo "OPENROUTER_API_KEY=your_api_key_here" > .env
+cd ..
 ```
 
 4. Run backend
 
 ```bash
+cd backend
 python main.py
 ```
 
