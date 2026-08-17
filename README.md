@@ -51,7 +51,7 @@ pip install -r requirements.txt
 
 ```bash
 cd Backend
-echo "GEMINI_API_KEY=your_api_key_here" > .env
+echo "OPENROUTER_API_KEY=your_api_key_here" > .env
 ```
 
 4. Run backend
